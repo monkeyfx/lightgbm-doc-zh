@@ -9,7 +9,7 @@ script:
   - make html
 
 after_script:
-  - cd build/html
+  - cd _build/html
   - git init
   - git config user.name ${GH_UN}
   - git config user.email ${GH_EMAIL}
