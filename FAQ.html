@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LightGBM FAQ 常见问题解答 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development Guide" href="Development-Guide.html" />
+    <link rel="prev" title="进阶主题" href="Advanced-Topics.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-Intro.html">Python 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters.html">参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parallel-Learning-Guide.html">并行学习指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced-Topics.html">进阶主题</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">内容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">关键问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">记住这是一个免费的/开放的社区支持，我们可能不能做到全天候的提供帮助.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lightgbm">LightGBM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r">R 包</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python 包</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>LightGBM FAQ 常见问题解答</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/FAQ.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lightgbm-faq">
+<h1>LightGBM FAQ 常见问题解答<a class="headerlink" href="#lightgbm-faq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>内容<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="#关键问题">关键问题</a></li>
+<li><a class="reference external" href="#lightgbm">LightGBM</a></li>
+<li><a class="reference external" href="#r包">R包</a></li>
+<li><a class="reference external" href="#python包">Python包</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h2>关键问题<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>在使用 LightGBM 遇到坑爹的问题时（程序奔溃，预测结果错误，无意义输出…）,你应该联系谁？</p>
+<p>如果你的问题不是那么紧急，可以把问题放到 <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues">Microsoft/LightGBM repository</a>.</p>
+<p>如果你的问题急需要解决，首先要明确你有哪些错误:</p>
+<ul class="simple">
+<li>你认为问题会不会复现在 CLI（命令行接口），R 或者 Python上 ？</li>
+<li>还是只会在某个特定的包（R 或者 Python）上出现?</li>
+<li>还是会在某个特定的编译器（gcc 或者 MinGW）上出现？</li>
+<li>还是会在某个特定的操作系统（Windows 或者 Linux）上出现？</li>
+<li>你能用一个简单的例子复现这些问题吗？</li>
+<li>你能（或者不能）在去掉所有的优化信息和在 debug 模式下编译 LightGBM 时复现这些问题吗？</li>
+</ul>
+<p>当出现问题的时候，根据上述答案，随时可以&#64;我们（不同的问题可以&#64;不同的人，下面是各种不同类型问题的负责人），这样我们就能更快地帮助你解决问题。</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/guolinke">&#64;guolinke</a> (C++ code / R-package / Python-package)</li>
+<li><a class="reference external" href="https://github.com/chivee">&#64;chivee</a> (C++ code / Python-package)</li>
+<li><a class="reference external" href="https://github.com/Laurae2">&#64;Laurae2</a> (R-package)</li>
+<li><a class="reference external" href="https://github.com/wxchan">&#64;wxchan</a> (Python-package)</li>
+<li><a class="reference external" href="https://github.com/henry0312">&#64;henry0312</a> (Python-package)</li>
+<li><a class="reference external" href="https://github.com/StrikerRUS">&#64;StrikerRUS</a> (Python-package)</li>
+<li><a class="reference external" href="https://github.com/huanzhang12">&#64;huanzhang12</a> (GPU support)</li>
+</ul>
+<div class="section" id="id3">
+<h3>记住这是一个免费的/开放的社区支持，我们可能不能做到全天候的提供帮助.<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="lightgbm">
+<h2>LightGBM<a class="headerlink" href="#lightgbm" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>问题 1</strong>：我可以去哪里找到关于LightGBM参数的更多详细内容？</li>
+<li><strong>方法 1</strong>：可以看一下这个 <a class="reference external" href="./Parameters.rst">Parameters</a> and <a class="reference external" href="https://sites.google.com/view/lauraepp/parameters">Laurae++/Parameters</a> 网站。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 2</strong>：在一个有百万个特征的数据集中，（要在很长一段时间后才开始训练或者）训练根本没有开始。</li>
+<li><strong>方法 2</strong>：对 <code class="docutils literal notranslate"><span class="pre">bin_construct_sample_cnt</span></code> 用一个较小的值和对 <code class="docutils literal notranslate"><span class="pre">min_data</span></code> 用一个较大的值。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 3</strong>：当在一个很大的数据集上使用LightGBM，我的电脑会耗尽内存。</li>
+<li><strong>方法 3</strong>：很多方法啊：将 <code class="docutils literal notranslate"><span class="pre">histogram_pool_size</span></code> 参数设置成你想为LightGBM分配的MB(histogram_pool_size + dataset size = approximately RAM used),
+减少 <code class="docutils literal notranslate"><span class="pre">num_leaves</span></code> 或减少 <code class="docutils literal notranslate"><span class="pre">max_bin</span></code> （点这里 <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/562">Microsoft/LightGBM#562</a>）。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 4</strong>：我使用Windows系统。我应该使用Visual Studio或者MinGW编译LightGBM吗？</li>
+<li><strong>方法 4</strong>：推荐使用 <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/542">Visual Studio</a>，因为它的性能更好。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 5</strong>：当使用LightGBM，我每次运行得到的结果都不同（结果不能复现）。</li>
+<li><strong>方法 5</strong>：这是一个很正常的问题，我们/你也无能为力。
+你可以试试使用 <code class="docutils literal notranslate"><span class="pre">gpu_use_dp</span> <span class="pre">=</span> <span class="pre">true</span></code> 来复现结果（点这里 <a class="reference external" href="https://github.com/Microsoft/LightGBM/pull/560#issuecomment-304561654">Microsoft/LightGBM#560</a>）。
+你也可以使用CPU的版本试试。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 6</strong>：Bagging在改变线程的数量时，是不能复现的。</li>
+<li><strong>方法 6</strong>：由于LightGBM Bagging是多线程运行的，它的输出依赖于使用线程的数量。
+There is <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/632">no workaround currently</a>。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 7</strong>：我试过使用随机森林模式，LightGBM崩溃啦！</li>
+<li><strong>方法 7</strong>：这是设计的问题。
+你必须使用 <code class="docutils literal notranslate"><span class="pre">bagging_fraction</span></code> 和 <code class="docutils literal notranslate"><span class="pre">feature_fraction</span></code> 与1不同，要和 <code class="docutils literal notranslate"><span class="pre">bagging_freq</span></code> 结合使用。
+看这个例子 <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/691">this thread</a>。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 8</strong>：当在一个很大的数据集上和很多核心系统使用LightGBMWindows系统时，CPU不是满负荷运行（例如只使用了10%的CPU）。</li>
+<li><strong>方法 8</strong>：请使用 <a class="reference external" href="https://www.visualstudio.com/downloads/">Visual Studio</a>，
+因为Visual Studio可能 <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/749">10x faster than MinGW</a>，尤其是在很大的树上。</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="r">
+<h2>R 包<a class="headerlink" href="#r" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>问题 1</strong>：在训练先前的LightGBM模型时一个错误出现后，任何使用LightGBM的训练命令都不会起作用。</li>
+<li><strong>方法 1</strong>：在R控制台中运行 <code class="docutils literal notranslate"><span class="pre">lgb.unloader(wipe</span> <span class="pre">=</span> <span class="pre">TRUE)</span></code>，再重新创建LightGBM数据集（这会消除所有与LightGBM相关的变量）。
+由于这些指针，选择不去消除这些变量不会修复这些错误。
+这是一个已知的问题: <a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/698">Microsoft/LightGBM#698</a>。</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><strong>问题 2</strong>：我使用过 <code class="docutils literal notranslate"><span class="pre">setinfo</span></code> ,试过打印我的 <code class="docutils literal notranslate"><span class="pre">lgb.Dataset</span></code> ,结果R控制台无响应。</li>
+<li><strong>方法 2</strong>：在使用 <code class="docutils literal notranslate"><span class="pre">setinfo</span></code> 后避免打印 <code class="docutils literal notranslate"><span class="pre">lgb.Dataset</span></code>.
+这是一个已知的bug：<a class="reference external" href="https://github.com/Microsoft/LightGBM/issues/539">Microsoft/LightGBM#539</a>。</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="python">
+<h2>Python 包<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>问题 1</strong>：当从GitHub使用 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code> 安装，我看到如下错误信息。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>error：错误：安装脚本指定绝对路径：
+/Users/Microsoft/LightGBM/python-package/lightgbm/../../lib_lightgbm.so
+setup()参数必须 *一直* 是/-分离路径相对于setup.py目录， *从不* 是绝对路径。
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>方法 1</strong>：这个错误在新版本中应该会被解决。
+如果你还会遇到这个问题，试着在你的Python包中去掉 <code class="docutils literal notranslate"><span class="pre">lightgbm.egg-info</span></code> 文件夹，再重装一下，
+或者对照一下这个 <a class="reference external" href="http://stackoverflow.com/questions/18085571/pip-install-error-setup-script-specifies-an-absolute-path">this thread on stackoverflow</a>。</p>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>问题 2</strong>：我看到错误信息如下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>在构建数据集前不能 get/set label/weight/init_score/group/num_data/num_feature。
+</pre></div>
+</div>
+<p>但是我已经使用下面的代码构建数据集</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">lightgbm</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>或如下错误信息</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>在释放原始数据后，不能设置predictor/reference/categorical特征。可以在创建数据集时设置free_raw_data=False避免上面的问题。
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>方法2</strong>: 因为LightGBM创建bin mappers来构建树，在一个Booster内的train和valid数据集共享同一个bin mappers，类别特征和特征名等信息，数据集对象在创建Booster时候被创建。
+如果你设置 <code class="docutils literal notranslate"><span class="pre">free_raw_data=True</span></code> (默认)，原始数据（在Python数据结构中的）将会被释放。
+所以，如果你想要：</p>
+<ul class="simple">
+<li>在创建数据集前get label(or weight/init_score/group)，这和get  <code class="docutils literal notranslate"><span class="pre">self.label</span></code> 操作相同。</li>
+<li>在创建数据集前set label(or weight/init_score/group)，这和 <code class="docutils literal notranslate"><span class="pre">self.label=some_label_array</span></code> 操作相同。</li>
+<li>在创建数据集前get num_data(or num_feature)，你可以使用 <code class="docutils literal notranslate"><span class="pre">self.data</span></code> 得到数据，然后如果你的数据是 <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>，使用一些类似  <code class="docutils literal notranslate"><span class="pre">self.data.shape</span></code> 的代码。</li>
+<li>在构建数据集之后set predictor(or reference/categorical feature)，你应该设置 <code class="docutils literal notranslate"><span class="pre">free_raw_data=False</span></code> 或使用同样的原始数据初始化数据集对象。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Development-Guide.html" class="btn btn-neutral float-right" title="Development Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Advanced-Topics.html" class="btn btn-neutral" title="进阶主题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>

@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python 包的相关介绍 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="特性" href="Features.html" />
+    <link rel="prev" title="快速入门指南" href="Quick-Start.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">快速入门</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python 快速入门</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">数据接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">设置参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">交叉验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">提前停止</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">预测</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters.html">参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parallel-Learning-Guide.html">并行学习指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced-Topics.html">进阶主题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Python 包的相关介绍</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Python-Intro.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python">
+<h1>Python 包的相关介绍<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<p>该文档给出了有关 LightGBM Python 软件包的基本演练.</p>
+<p><strong>其它有用的链接列表</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/examples/python-guide">Python 例子</a></li>
+<li><a class="reference external" href="./Python-API.rst">Python API</a></li>
+<li><a class="reference external" href="./Parameters-Tuning.rst">参数优化</a></li>
+</ul>
+<div class="section" id="id1">
+<h2>安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>安装 Python 软件包的依赖,
+<code class="docutils literal notranslate"><span class="pre">setuptools</span></code>, <code class="docutils literal notranslate"><span class="pre">wheel</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> 和 <code class="docutils literal notranslate"><span class="pre">scipy</span></code> 是必须的, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 对于 sklearn 接口和推荐也是必须的:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">setuptools</span> <span class="n">wheel</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span> <span class="o">-</span><span class="n">U</span>
+</pre></div>
+</div>
+<p>参考 <a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/python-package">Python-package</a> 安装指南文件夹.</p>
+<p>为了验证是否安装成功, 可以在 Python 中 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">lightgbm</span></code> 试试:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>数据接口<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM Python 模块能够使用以下几种方式来加载数据:</p>
+<ul class="simple">
+<li>libsvm/tsv/csv txt format file（libsvm/tsv/csv 文本文件格式）</li>
+<li>Numpy 2D array, pandas object（Numpy 2维数组, pandas 对象）</li>
+<li>LightGBM binary file（LightGBM 二进制文件）</li>
+</ul>
+<p>加载后的数据存在 <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> 对象中.</p>
+<p><strong>要加载 ligsvm 文本文件或 LightGBM 二进制文件到 Dataset 中:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;train.svm.bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>要加载 numpy 数组到 Dataset 中:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># 500 个样本, 每一个包含 10 个特征</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>  <span class="c1"># 二元目标变量,  0 和 1</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>要加载 scpiy.sparse.csr_matrix 数组到 Dataset 中:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">((</span><span class="n">dat</span><span class="p">,</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)))</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">csr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>保存 Dataset 到 LightGBM 二进制文件将会使得加载更快速:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;train.svm.txt&#39;</span><span class="p">)</span>
+<span class="n">train_data</span><span class="o">.</span><span class="n">save_binary</span><span class="p">(</span><span class="s1">&#39;train.bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>创建验证数据:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">create_valid</span><span class="p">(</span><span class="s1">&#39;test.svm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;test.svm&#39;</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="n">train_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>在 LightGBM 中, 验证数据应该与训练数据一致（格式一致）.</p>
+<p><strong>指定 feature names（特征名称）和 categorical features（分类特征）:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">feature_name</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">],</span> <span class="n">categorical_feature</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;c3&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>LightGBM 可以直接使用 categorical features（分类特征）作为 input（输入）.
+它不需要被转换成 one-hot coding（毒热编码）, 并且它比 one-hot coding（毒热编码）更快（约快上 8 倍）</p>
+<p><strong>注意</strong>: 在你构造 <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> 之前, 你应该将分类特征转换为 <code class="docutils literal notranslate"><span class="pre">int</span></code> 类型的值.</p>
+<p><strong>当需要时可以设置权重:</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>或者</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">train_data</span><span class="o">.</span><span class="n">set_weight</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>并且你也可以使用 <code class="docutils literal notranslate"><span class="pre">Dataset.set_init_score()</span></code> 来初始化 score（分数）, 以及使用 <code class="docutils literal notranslate"><span class="pre">Dataset.set_group()</span></code> ；来设置 group/query 数据以用于 ranking（排序）任务.</p>
+<p><strong>内存的高使用:</strong></p>
+<p>LightGBM 中的 <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> 对象由于只需要保存 discrete bins（离散的数据块）, 因此它具有很好的内存效率.
+然而, Numpy/Array/Pandas 对象的内存开销较大.
+如果你关心你的内存消耗. 您可以根据以下方式来节省内存:</p>
+<ol class="arabic simple">
+<li>在构造 <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> 时设置 <code class="docutils literal notranslate"><span class="pre">free_raw_data=True</span></code> （默认为 <code class="docutils literal notranslate"><span class="pre">True</span></code>）</li>
+<li>在 <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> 被构造完之后手动设置 <code class="docutils literal notranslate"><span class="pre">raw_data=None</span></code></li>
+<li>调用 <code class="docutils literal notranslate"><span class="pre">gc</span></code></li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h2>设置参数<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 可以使用一个 pairs 的 list 或一个字典来设置 <a class="reference external" href="./Parameters.rst">参数</a>.
+例如:</p>
+<ul>
+<li><p class="first">Booster（提升器）参数:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;num_trees&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;objective&#39;</span><span class="p">:</span><span class="s1">&#39;binary&#39;</span><span class="p">}</span>
+<span class="n">param</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;auc&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">您还可以指定多个 eval 指标:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auc&#39;</span><span class="p">,</span> <span class="s1">&#39;binary_logloss&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>训练<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>训练一个模型时, 需要一个 parameter list（参数列表）和 data set（数据集）:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_round</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">bst</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">num_round</span><span class="p">,</span> <span class="n">valid_sets</span><span class="o">=</span><span class="p">[</span><span class="n">test_data</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>在训练完成后, 可以使用如下方式来存储模型:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bst</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;model.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>训练后的模型也可以转存为 JSON 的格式:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">json_model</span> <span class="o">=</span> <span class="n">bst</span><span class="o">.</span><span class="n">dump_model</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>以保存模型也可以使用如下的方式来加载.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bst</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Booster</span><span class="p">(</span><span class="n">model_file</span><span class="o">=</span><span class="s1">&#39;model.txt&#39;</span><span class="p">)</span>  <span class="c1">#init model</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>交叉验证<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>使用 5-折 方式的交叉验证来进行训练（4 个训练集, 1 个测试集）:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_round</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">lgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">num_round</span><span class="p">,</span> <span class="n">nfold</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>提前停止<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>如果您有一个验证集, 你可以使用提前停止找到最佳数量的 boosting rounds（梯度次数）.
+提前停止需要在 <code class="docutils literal notranslate"><span class="pre">valid_sets</span></code> 中至少有一个集合.
+如果有多个，它们都会被使用:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bst</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">num_round</span><span class="p">,</span> <span class="n">valid_sets</span><span class="o">=</span><span class="n">valid_sets</span><span class="p">,</span> <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">bst</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;model.txt&#39;</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">bst</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>该模型将开始训练, 直到验证得分停止提高为止.
+验证错误需要至少每个 <cite>early_stopping_rounds</cite> 减少以继续训练.</p>
+<p>如果提前停止, 模型将有 1 个额外的字段: <cite>bst.best_iteration</cite>.
+请注意 <cite>train()</cite> 将从最后一次迭代中返回一个模型, 而不是最好的一个.</p>
+<p>This works with both metrics to minimize (L2, log loss, etc.) and to maximize (NDCG, AUC).
+Note that if you specify more than one evaluation metric, all of them will be used for early stopping.</p>
+<p>这与两个度量标准一起使用以达到最小化（L2, 对数损失, 等等）和最大化（NDCG, AUC）.
+请注意, 如果您指定多个评估指标, 则它们都会用于提前停止.</p>
+</div>
+<div class="section" id="id7">
+<h2>预测<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>已经训练或加载的模型都可以对数据集进行预测:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7 个样本, 每一个包含 10 个特征</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">bst</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果在训练过程中启用了提前停止, 可以用 <cite>bst.best_iteration</cite> 从最佳迭代中获得预测结果:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ypred</span> <span class="o">=</span> <span class="n">bst</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">bst</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Features.html" class="btn btn-neutral float-right" title="特性" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Quick-Start.html" class="btn btn-neutral" title="快速入门指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>

@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>快速入门指南 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python 包的相关介绍" href="Python-Intro.html" />
+    <link rel="prev" title="安装指南" href="Installation-Guide.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">安装指南</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">快速入门</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">训练数据格式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">类别特征支持</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#query-group">权重和 Query/Group 数据</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">参数快速查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lightgbm">运行 LightGBM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">示例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Python-Intro.html">Python 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters.html">参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parallel-Learning-Guide.html">并行学习指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced-Topics.html">进阶主题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>快速入门指南</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Quick-Start.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>快速入门指南<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>本文档是 LightGBM CLI 版本的快速入门指南。</p>
+<p>参考 <a class="reference external" href="./Installation-Guide.rst">安装指南</a> 先安装 LightGBM 。</p>
+<p><strong>其他有帮助的链接列表</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="./Parameters.rst">参数</a></li>
+<li><a class="reference external" href="./Parameters-Tuning.rst">参数调整</a></li>
+<li><a class="reference external" href="./Python-Intro.rst">Python 包快速入门</a></li>
+<li><a class="reference external" href="./Python-API.rst">Python API</a></li>
+</ul>
+<div class="section" id="id2">
+<h2>训练数据格式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 支持 <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> 和 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">LibSVM</a> 格式的输入数据文件。</p>
+<p>Label 是第一列的数据，文件中是不包含 header（标题） 的。</p>
+<div class="section" id="id3">
+<h3>类别特征支持<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>12/5/2016 更新:</p>
+<p>LightGBM 可以直接使用 categorical feature（类别特征）（不需要单独编码）。
+<a class="reference external" href="http://stat-computing.org/dataexpo/2009/">Expo data</a> 实验显示，与 one-hot 编码相比，其速度提高了 8 倍。</p>
+<p>有关配置的详细信息，请参阅 <a class="reference external" href="./Parameters.rst">参数</a> 章节。</p>
+</div>
+<div class="section" id="query-group">
+<h3>权重和 Query/Group 数据<a class="headerlink" href="#query-group" title="Permalink to this headline">¶</a></h3>
+<p>LightGBM 也支持加权训练，它需要一个额外的 <a class="reference external" href="./Parameters.rst#io-parameters">加权数据</a> 。
+它需要额外的 <a class="reference external" href="./Parameters.rst#io-parameters">query 数据</a> 用于排名任务。</p>
+<p>11/3/2016 更新:</p>
+<ol class="arabic simple">
+<li>现在支持 header（标题）输入</li>
+<li>可以指定 label 列，权重列和 query/group id 列。
+索引和列都支持</li>
+<li>可以指定一个被忽略的列的列表</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>参数快速查看<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>参数格式是 <code class="docutils literal notranslate"><span class="pre">key1=value1</span> <span class="pre">key2=value2</span> <span class="pre">...</span></code> 。
+参数可以在配置文件和命令行中。</p>
+<p>一些重要的参数如下 :</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type（类型）=string, alias（别名）=<code class="docutils literal notranslate"><span class="pre">config_file</span></code><ul>
+<li>配置文件的路径</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">task</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">train</span></code>, type（类型）=enum, options（可选）=<code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code>, <code class="docutils literal notranslate"><span class="pre">convert_model</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">train</span></code>, alias（别名）=<code class="docutils literal notranslate"><span class="pre">training</span></code>, 用于训练</li>
+<li><code class="docutils literal notranslate"><span class="pre">predict</span></code>, alias（别名）=<code class="docutils literal notranslate"><span class="pre">prediction</span></code>, <code class="docutils literal notranslate"><span class="pre">test</span></code>, 用于预测。</li>
+<li><code class="docutils literal notranslate"><span class="pre">convert_model</span></code>, 用于将模型文件转换为 if-else 格式， 在 <a class="reference external" href="./Parameters.rst#convert-model-parameters">转换模型参数</a> 中了解更多信息</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">application</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">regression</span></code>, 类型=enum,
+可选=<code class="docutils literal notranslate"><span class="pre">regression</span></code>, <code class="docutils literal notranslate"><span class="pre">regression_l1</span></code>, <code class="docutils literal notranslate"><span class="pre">huber</span></code>, <code class="docutils literal notranslate"><span class="pre">fair</span></code>, <code class="docutils literal notranslate"><span class="pre">poisson</span></code>, <code class="docutils literal notranslate"><span class="pre">quantile</span></code>, <code class="docutils literal notranslate"><span class="pre">quantile_l2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">binary</span></code>, <code class="docutils literal notranslate"><span class="pre">multiclass</span></code>, <code class="docutils literal notranslate"><span class="pre">multiclassova</span></code>, <code class="docutils literal notranslate"><span class="pre">xentropy</span></code>, <code class="docutils literal notranslate"><span class="pre">xentlambda</span></code>, <code class="docutils literal notranslate"><span class="pre">lambdarank</span></code>,
+别名=<code class="docutils literal notranslate"><span class="pre">objective</span></code>, <code class="docutils literal notranslate"><span class="pre">app</span></code><ul>
+<li>回归 application<ul>
+<li><code class="docutils literal notranslate"><span class="pre">regression_l2</span></code>, L2 损失, 别名=<code class="docutils literal notranslate"><span class="pre">regression</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error</span></code>, <code class="docutils literal notranslate"><span class="pre">mse</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">regression_l1</span></code>, L1 损失, 别名=<code class="docutils literal notranslate"><span class="pre">mean_absolute_error</span></code>, <code class="docutils literal notranslate"><span class="pre">mae</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">huber</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Huber_loss">Huber loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">fair</span></code>, <a class="reference external" href="https://www.kaggle.com/c/allstate-claims-severity/discussion/24520">Fair loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">poisson</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_regression">Poisson regression</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">quantile</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_regression">Quantile regression</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">quantile_l2</span></code>, 与 <code class="docutils literal notranslate"><span class="pre">quantile</span></code> 类似, 但是使用 L2 损失</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">binary</span></code>, 二进制`log loss`_ 分类 application</li>
+<li>多类别分类 application<ul>
+<li><code class="docutils literal notranslate"><span class="pre">multiclass</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> 目标函数, <code class="docutils literal notranslate"><span class="pre">num_class</span></code> 也应该被设置</li>
+<li><code class="docutils literal notranslate"><span class="pre">multiclassova</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Multiclass_classification#One-vs.-rest">One-vs-All</a> 二元目标函数, <code class="docutils literal notranslate"><span class="pre">num_class</span></code> 也应该被设置</li>
+</ul>
+</li>
+<li>交叉熵 application<ul>
+<li><code class="docutils literal notranslate"><span class="pre">xentropy</span></code>, 交叉熵的目标函数 (可选线性权重), 别名=<code class="docutils literal notranslate"><span class="pre">cross_entropy</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">xentlambda</span></code>, 交叉熵的替代参数化, 别名=<code class="docutils literal notranslate"><span class="pre">cross_entropy_lambda</span></code></li>
+<li>label 是在 [0, 1] 间隔中的任何东西</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">lambdarank</span></code>, <a class="reference external" href="https://papers.nips.cc/paper/2971-learning-to-rank-with-nonsmooth-cost-functions.pdf">lambdarank</a> application<ul>
+<li>在 lambdarank 任务中 label 应该是 <code class="docutils literal notranslate"><span class="pre">int</span></code> 类型，而较大的数字表示较高的相关性（例如，0:bad, 1:fair, 2:good, 3:perfect）</li>
+<li><code class="docutils literal notranslate"><span class="pre">label_gain</span></code> 可以用来设置 <code class="docutils literal notranslate"><span class="pre">int</span></code> label 的 gain(weight)（增益（权重））</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">boosting</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">gbdt</span></code>, type=enum,
+选项=<code class="docutils literal notranslate"><span class="pre">gbdt</span></code>, <code class="docutils literal notranslate"><span class="pre">rf</span></code>, <code class="docutils literal notranslate"><span class="pre">dart</span></code>, <code class="docutils literal notranslate"><span class="pre">goss</span></code>,
+别名=<code class="docutils literal notranslate"><span class="pre">boost</span></code>, <code class="docutils literal notranslate"><span class="pre">boosting_type</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">gbdt</span></code>, traditional Gradient Boosting Decision Tree（传统梯度提升决策树）</li>
+<li><code class="docutils literal notranslate"><span class="pre">rf</span></code>, 随机森林</li>
+<li><code class="docutils literal notranslate"><span class="pre">dart</span></code>, <a class="reference external" href="https://arxiv.org/abs/1505.01866">Dropouts meet Multiple Additive Regression Trees</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">goss</span></code>, Gradient-based One-Side Sampling（基于梯度的单面采样）</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, 类型=string, 别名=<code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">train_data</span></code><ul>
+<li>训练数据， LightGBM 将从这个数据训练</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">valid</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, 类型=multi-string, 别名=<code class="docutils literal notranslate"><span class="pre">test</span></code>, <code class="docutils literal notranslate"><span class="pre">valid_data</span></code>, <code class="docutils literal notranslate"><span class="pre">test_data</span></code><ul>
+<li>验证/测试 数据，LightGBM 将输出这些数据的指标</li>
+<li>支持多个验证数据，使用 <code class="docutils literal notranslate"><span class="pre">,</span></code> 分开</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_iterations</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">100</span></code>, 类型=int,
+别名=<code class="docutils literal notranslate"><span class="pre">num_iteration</span></code>, <code class="docutils literal notranslate"><span class="pre">num_tree</span></code>, <code class="docutils literal notranslate"><span class="pre">num_trees</span></code>, <code class="docutils literal notranslate"><span class="pre">num_round</span></code>, <code class="docutils literal notranslate"><span class="pre">num_rounds</span></code>, <code class="docutils literal notranslate"><span class="pre">num_boost_round</span></code><ul>
+<li>boosting iterations/trees 的数量</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">0.1</span></code>, 类型=double, 别名=<code class="docutils literal notranslate"><span class="pre">shrinkage_rate</span></code><ul>
+<li>shrinkage rate（收敛率）</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_leaves</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">31</span></code>, 类型=int, 别名=<code class="docutils literal notranslate"><span class="pre">num_leaf</span></code><ul>
+<li>在一棵树中的叶子数量</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">tree_learner</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">serial</span></code>, 类型=enum, 可选=<code class="docutils literal notranslate"><span class="pre">serial</span></code>, <code class="docutils literal notranslate"><span class="pre">feature</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">voting</span></code>, 别名=<code class="docutils literal notranslate"><span class="pre">tree</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">serial</span></code>, 单个 machine tree 学习器</li>
+<li><code class="docutils literal notranslate"><span class="pre">feature</span></code>, 别名=<code class="docutils literal notranslate"><span class="pre">feature_parallel</span></code>, feature parallel tree learner（特征并行树学习器）</li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>, 别名=<code class="docutils literal notranslate"><span class="pre">data_parallel</span></code>, data parallel tree learner（数据并行树学习器）</li>
+<li><code class="docutils literal notranslate"><span class="pre">voting</span></code>, 别名=<code class="docutils literal notranslate"><span class="pre">voting_parallel</span></code>, voting parallel tree learner（投票并行树学习器）</li>
+<li>参考 <a class="reference external" href="./Parallel-Learning-Guide.rst">Parallel Learning Guide（并行学习指南）</a> 来了解更多细节</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_threads</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">OpenMP_default</span></code>, 类型=int, 别名=<code class="docutils literal notranslate"><span class="pre">num_thread</span></code>, <code class="docutils literal notranslate"><span class="pre">nthread</span></code><ul>
+<li>LightGBM 的线程数</li>
+<li>为了获得最好的速度，将其设置为 <strong>real CPU cores（真实 CPU 内核）</strong> 数量，而不是线程数（大多数 CPU 使用 <a class="reference external" href="https://en.wikipedia.org/wiki/Hyper-threading">hyper-threading</a> 来为每个 CPU core 生成 2 个线程）</li>
+<li>对于并行学习，不应该使用全部的 CPU cores ，因为这会导致网络性能不佳</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_depth</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">-1</span></code>, 类型=int<ul>
+<li>树模型最大深度的限制。
+当 <code class="docutils literal notranslate"><span class="pre">#data</span></code> 很小的时候，这被用来处理 overfit（过拟合）。
+树仍然通过 leaf-wise 生长</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">0</span></code> 意味着没有限制</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_data_in_leaf</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">20</span></code>, 类型=int, 别名=<code class="docutils literal notranslate"><span class="pre">min_data_per_leaf</span></code> , <code class="docutils literal notranslate"><span class="pre">min_data</span></code>, <code class="docutils literal notranslate"><span class="pre">min_child_samples</span></code><ul>
+<li>一个叶子中的最小数据量。可以用这个来处理过拟合。</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_sum_hessian_in_leaf</span></code>, 默认=<code class="docutils literal notranslate"><span class="pre">1e-3</span></code>, 类型=double,
+别名=<code class="docutils literal notranslate"><span class="pre">min_sum_hessian_per_leaf</span></code>, <code class="docutils literal notranslate"><span class="pre">min_sum_hessian</span></code>, <code class="docutils literal notranslate"><span class="pre">min_hessian</span></code>, <code class="docutils literal notranslate"><span class="pre">min_child_weight</span></code><ul>
+<li>一个叶子节点中最小的 sum hessian 。类似于 <code class="docutils literal notranslate"><span class="pre">min_data_in_leaf</span></code> ，它可以用来处理过拟合。</li>
+</ul>
+</li>
+</ul>
+<p>想要了解全部的参数， 请参阅 <a class="reference external" href="./Parameters.rst">Parameters（参数）</a>.</p>
+</div>
+<div class="section" id="lightgbm">
+<h2>运行 LightGBM<a class="headerlink" href="#lightgbm" title="Permalink to this headline">¶</a></h2>
+<p>对于 Windows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lightgbm</span><span class="o">.</span><span class="n">exe</span> <span class="n">config</span><span class="o">=</span><span class="n">your_config_file</span> <span class="n">other_args</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>对于 Unix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">lightgbm</span> <span class="n">config</span><span class="o">=</span><span class="n">your_config_file</span> <span class="n">other_args</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>参数既可以在配置文件中，也可以在命令行中，命令行中的参数优先于配置文件。例如下面的命令行会保留 <code class="docutils literal notranslate"><span class="pre">num_trees=10</span></code> ，并忽略配置文件中的相同参数。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">lightgbm</span> <span class="n">config</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">conf</span> <span class="n">num_trees</span><span class="o">=</span><span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>示例<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/examples/binary_classification">Binary Classification（二元分类）</a></li>
+<li><a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/examples/regression">Regression（回归）</a></li>
+<li><a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/examples/lambdarank">Lambdarank</a></li>
+<li><a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/examples/parallel_learning">Parallel Learning（并行学习）</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Python-Intro.html" class="btn btn-neutral float-right" title="Python 包的相关介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Installation-Guide.html" class="btn btn-neutral" title="安装指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>

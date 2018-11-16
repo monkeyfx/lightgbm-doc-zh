@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>并行学习指南 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LightGBM GPU 教程" href="GPU-Tutorial.html" />
+    <link rel="prev" title="Python API" href="Python-API.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-Intro.html">Python 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters.html">参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">并行学习指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">选择合适的并行算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">构建并行版本</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">准备工作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#socket">Socket 版本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mpi">MPI 版本</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">运行并行学习</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Socket 版本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">MPI 版本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">例子</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced-Topics.html">进阶主题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>并行学习指南</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Parallel-Learning-Guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>并行学习指南<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>这是一篇 LightGBM 的并行学习教程.</p>
+<p>点击 <a class="reference external" href="./Quick-Start.rst">快速入门</a> 来学习怎样使用 LightGBM.</p>
+<div class="section" id="id2">
+<h2>选择合适的并行算法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 现已提供了以下并行学习算法.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>Parallel Algorithm</strong></th>
+<th class="head"><strong>How to Use</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Data parallel</td>
+<td><code class="docutils literal notranslate"><span class="pre">tree_learner=data</span></code></td>
+</tr>
+<tr class="row-odd"><td>Feature parallel</td>
+<td><code class="docutils literal notranslate"><span class="pre">tree_learner=feature</span></code></td>
+</tr>
+<tr class="row-even"><td>Voting parallel</td>
+<td><code class="docutils literal notranslate"><span class="pre">tree_learner=voting</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>这些算法适用于不同场景,如下表所示:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="32%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head"><strong>#data is small</strong></th>
+<th class="head"><strong>#data is large</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>#feature is small</strong></td>
+<td>Feature Parallel</td>
+<td>Data Parallel</td>
+</tr>
+<tr class="row-odd"><td><strong>#feature is large</strong></td>
+<td>Feature Parallel</td>
+<td>Voting Parallel</td>
+</tr>
+</tbody>
+</table>
+<p>在 <a class="reference external" href="./Features.rst#optimization-in-parallel-learning">optimization in parallel learning</a> 了解更多并行算法的细节.</p>
+</div>
+<div class="section" id="id3">
+<h2>构建并行版本<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>默认的并行版本支持基于 socket 的并行学习.</p>
+<p>如果你想构建基于 MPI 的并行版本, 请参考 <a class="reference external" href="./Installation-Guide.rst#build-mpi-version">安装指南</a>.</p>
+</div>
+<div class="section" id="id4">
+<h2>准备工作<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="socket">
+<h3>Socket 版本<a class="headerlink" href="#socket" title="Permalink to this headline">¶</a></h3>
+<p>它需要收集所有想要运行并行学习的机器的所有 IP 并且指定一个 TCP 端口号 (假设是 12345 ) ,
+更改防火墙使得这个端口可以被访问 (12345). 然后把这些 IP 和端口写入一个文件中 (假设是 <code class="docutils literal notranslate"><span class="pre">mlist.txt</span></code>), 如下所示:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">machine1_ip</span> <span class="mi">12345</span>
+<span class="n">machine2_ip</span> <span class="mi">12345</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mpi">
+<h3>MPI 版本<a class="headerlink" href="#mpi" title="Permalink to this headline">¶</a></h3>
+<p>它需要收集所有想要运行并行学习机器的 IP (或 hostname) .
+然后把这些IP写入一个文件中 (例如 <code class="docutils literal notranslate"><span class="pre">mlist.txt</span></code>) 如下所示:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">machine1_ip</span>
+<span class="n">machine2_ip</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: 对于 windows 用户, 需要安装 “smpd” 来开启 MPI 服务. 更多细节点击 <a class="reference external" href="https://blogs.technet.microsoft.com/windowshpc/2015/02/02/how-to-compile-and-run-a-simple-ms-mpi-program/">here</a>.</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>运行并行学习<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Socket 版本<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">在配置文件中编辑以下参数:</p>
+<p><code class="docutils literal notranslate"><span class="pre">tree_learner=your_parallel_algorithm</span></code>, 在这里编辑 <code class="docutils literal notranslate"><span class="pre">your_parallel_algorithm</span></code> (e.g. feature/data) .</p>
+<p><code class="docutils literal notranslate"><span class="pre">num_machines=your_num_machines</span></code>, 在这里编辑 <code class="docutils literal notranslate"><span class="pre">your_num_machines</span></code> (e.g. 4) .</p>
+<p><code class="docutils literal notranslate"><span class="pre">machine_list_file=mlist.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">mlist.txt</span></code> 在 <a class="reference external" href="#preparation">准备工作</a> 生成.</p>
+<p><code class="docutils literal notranslate"><span class="pre">local_listen_port=12345</span></code>, <code class="docutils literal notranslate"><span class="pre">12345</span></code> 在 <a class="reference external" href="#preparation">准备工作</a> 分配.</p>
+</li>
+<li><p class="first">拷贝数据文件, 可执行文件, 配置文件和 <code class="docutils literal notranslate"><span class="pre">mlist.txt</span></code> 到所有机器.</p>
+</li>
+<li><p class="first">在所有机器上运行以下命令, 你需要更改 <code class="docutils literal notranslate"><span class="pre">your_config_file</span></code> 为真实配置文件.</p>
+<p>Windows: <code class="docutils literal notranslate"><span class="pre">lightgbm.exe</span> <span class="pre">config=your_config_file</span></code></p>
+<p>Linux: <code class="docutils literal notranslate"><span class="pre">./lightgbm</span> <span class="pre">config=your_config_file</span></code></p>
+</li>
+</ol>
+</div>
+<div class="section" id="id7">
+<h3>MPI 版本<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">在配置中编辑以下参数:</p>
+<p><code class="docutils literal notranslate"><span class="pre">tree_learner=your_parallel_algorithm</span></code>, 在这里编辑 <code class="docutils literal notranslate"><span class="pre">your_parallel_algorithm</span></code> (e.g. feature/data) .</p>
+<p><code class="docutils literal notranslate"><span class="pre">num_machines=your_num_machines</span></code>, 在这里编辑 <code class="docutils literal notranslate"><span class="pre">your_num_machines</span></code> (e.g. 4) .</p>
+</li>
+<li><p class="first">拷贝数据文件, 可执行文件, 配置文件和 <code class="docutils literal notranslate"><span class="pre">mlist.txt</span></code> 到所有机器.</p>
+<p><strong>Note</strong>: MPI 需要运行在 <strong>所有机器的相同路径上</strong>.</p>
+</li>
+<li><p class="first">在机器上运行以下命令 (不需要运行所有机器), 需要更改 <code class="docutils literal notranslate"><span class="pre">your_config_file</span></code> 为真实的配置文件.</p>
+<p>Windows:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpiexec</span><span class="o">.</span><span class="n">exe</span> <span class="o">/</span><span class="n">machinefile</span> <span class="n">mlist</span><span class="o">.</span><span class="n">txt</span> <span class="n">lightgbm</span><span class="o">.</span><span class="n">exe</span> <span class="n">config</span><span class="o">=</span><span class="n">your_config_file</span>
+</pre></div>
+</div>
+<p>Linux:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpiexec</span> <span class="o">--</span><span class="n">machinefile</span> <span class="n">mlist</span><span class="o">.</span><span class="n">txt</span> <span class="o">./</span><span class="n">lightgbm</span> <span class="n">config</span><span class="o">=</span><span class="n">your_config_file</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="id8">
+<h3>例子<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Microsoft/lightgbm/tree/master/examples/parallel_learning">A simple parallel example</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="GPU-Tutorial.html" class="btn btn-neutral float-right" title="LightGBM GPU 教程" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Python-API.html" class="btn btn-neutral" title="Python API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>

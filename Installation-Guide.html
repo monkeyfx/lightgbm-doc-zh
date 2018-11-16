@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>安装指南 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="快速入门指南" href="Quick-Start.html" />
+    <link rel="prev" title="欢迎来到 LightGBM 的中文文档!" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">安装指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#visual-studio-or-msbuild">Visual Studio (or MSBuild)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gui">使用 GUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">使用命令行</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mingw64">MinGW64</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#osx">OSX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-mpi">Build MPI 版本</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">使用 GUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">使用命令行</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">OSX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-gpu">Build GPU 版本</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protobuf">Protobuf 支持</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Docker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-Intro.html">Python 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters.html">参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parallel-Learning-Guide.html">并行学习指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced-Topics.html">进阶主题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>安装指南</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Installation-Guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>安装指南<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>该页面是 LightGBM CLI 版本的构建指南.</p>
+<p>要构建 Python 和 R 的软件包, 请分别参阅 <a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/python-package">Python-package</a> 和 <a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/R-package">R-package</a> 文件夹.</p>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 可以使用 Visual Studio, MSBuild 与 CMake 或 MinGW 来在  Windows 上构建.</p>
+<div class="section" id="visual-studio-or-msbuild">
+<h3>Visual Studio (or MSBuild)<a class="headerlink" href="#visual-studio-or-msbuild" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="gui">
+<h4>使用 GUI<a class="headerlink" href="#gui" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">安装 <a class="reference external" href="https://www.visualstudio.com/downloads/">Visual Studio</a> (2015 或更新版本).</p>
+</li>
+<li><p class="first">下载 <a class="reference external" href="https://github.com/Microsoft/LightGBM/archive/master.zip">zip archive</a> 并且 unzip（解压）它.</p>
+</li>
+<li><p class="first">定位到 <code class="docutils literal notranslate"><span class="pre">LightGBM-master/windows</span></code> 文件夹.</p>
+</li>
+<li><p class="first">使用 Visual Studio 打开 <code class="docutils literal notranslate"><span class="pre">LightGBM.sln</span></code> 文件, 选择 <code class="docutils literal notranslate"><span class="pre">Release</span></code> 配置并且点击 <code class="docutils literal notranslate"><span class="pre">BUILD</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">Solution</span> <span class="pre">(Ctrl+Shift+B)</span></code>.</p>
+<p>如果出现有关 <strong>Platform Toolset</strong> 的错误, 定位到 <code class="docutils literal notranslate"><span class="pre">PROJECT</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Properties</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Configuration</span> <span class="pre">Properties</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">General</span></code> 然后选择 toolset 安装到你的机器.</p>
+</li>
+</ol>
+<p>该 exe 文件可以在 <code class="docutils literal notranslate"><span class="pre">LightGBM-master/windows/x64/Release</span></code> 文件夹中找到.</p>
+</div>
+<div class="section" id="id2">
+<h4>使用命令行<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">安装 <a class="reference external" href="https://git-scm.com/download/win">Git for Windows</a>, <a class="reference external" href="https://cmake.org/">CMake</a> (3.8 或更新版本) 以及 <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">MSBuild</a> (<strong>MSBuild</strong> 是非必要的, 如果已安装 <strong>Visual Studio</strong> (2015 或更新版本) 的话).</p>
+</li>
+<li><p class="first">运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span>
+<span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DCMAKE_GENERATOR_PLATFORM</span><span class="o">=</span><span class="n">x64</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">target</span> <span class="n">ALL_BUILD</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>这些 exe 和 dll 文件可以在 <code class="docutils literal notranslate"><span class="pre">LightGBM/Release</span></code> 文件夹中找到.</p>
+</div>
+</div>
+<div class="section" id="mingw64">
+<h3>MinGW64<a class="headerlink" href="#mingw64" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">安装 <a class="reference external" href="https://git-scm.com/download/win">Git for Windows</a>, <a class="reference external" href="https://cmake.org/">CMake</a> 和 <a class="reference external" href="https://mingw-w64.org/doku.php/download">MinGW-w64</a>.</p>
+</li>
+<li><p class="first">运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span>
+<span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="s2">&quot;MinGW Makefiles&quot;</span> <span class="o">..</span>
+<span class="n">mingw32</span><span class="o">-</span><span class="n">make</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>这些 exe 和 dll 文件可以在 <code class="docutils literal notranslate"><span class="pre">LightGBM/</span></code> 文件夹中找到.</p>
+<p><strong>注意</strong>: 也许你需要再一次运行 <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">-G</span> <span class="pre">&quot;MinGW</span> <span class="pre">Makefiles&quot;</span> <span class="pre">..</span></code> 命令, 如果遇到 <code class="docutils literal notranslate"><span class="pre">sh.exe</span> <span class="pre">was</span> <span class="pre">found</span> <span class="pre">in</span> <span class="pre">your</span> <span class="pre">PATH</span></code> 错误的话.</p>
+<p>也许你还想要参阅 <a class="reference external" href="./gcc-Tips.rst">gcc 建议</a>.</p>
+</div>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 使用 <strong>CMake</strong> 来构建. 运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+<p><strong>注意</strong>: glibc &gt;= 2.14 是必须的.</p>
+<p>也许你还想要参阅 <a class="reference external" href="./gcc-Tips.rst">gcc 建议</a>.</p>
+</div>
+<div class="section" id="osx">
+<h2>OSX<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 依赖于 <strong>OpenMP</strong> 进行编译, 然而 Apple Clang 不支持它.</p>
+<p>请使用以下命令来安装 <strong>gcc/g++</strong> :</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span>
+<span class="n">brew</span> <span class="n">install</span> <span class="n">gcc</span> <span class="o">--</span><span class="n">without</span><span class="o">-</span><span class="n">multilib</span>
+</pre></div>
+</div>
+<p>然后安装 LightGBM:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">export</span> <span class="n">CXX</span><span class="o">=</span><span class="n">g</span><span class="o">++-</span><span class="mi">7</span> <span class="n">CC</span><span class="o">=</span><span class="n">gcc</span><span class="o">-</span><span class="mi">7</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+<p>也许你还想要参阅 <a class="reference external" href="./gcc-Tips.rst">gcc 建议</a>.</p>
+</div>
+<div class="section" id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>请参阅 <a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/docker">Docker 文件夹</a>.</p>
+</div>
+<div class="section" id="build-mpi">
+<h2>Build MPI 版本<a class="headerlink" href="#build-mpi" title="Permalink to this headline">¶</a></h2>
+<p>LightGBM 默认的构建版本是基于 socket 的的.
+LightGBM 也支持 <a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">MPI</a>.
+MPI 是一种与 <a class="reference external" href="https://en.wikipedia.org/wiki/Remote_direct_memory_access">RDMA</a> 支持的高性能通信方法.</p>
+<p>如果您需要运行具有高性能通信的并行学习应用程序, 则可以构建带有 MPI 支持的 LightGBM.</p>
+<div class="section" id="id3">
+<h3>Windows<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h4>使用 GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">需要先安装 <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=49926">MS MPI</a> . 需要 <code class="docutils literal notranslate"><span class="pre">msmpisdk.msi</span></code> 和 <code class="docutils literal notranslate"><span class="pre">MSMpiSetup.exe</span></code>.</p>
+</li>
+<li><p class="first">安装 <a class="reference external" href="https://www.visualstudio.com/downloads/">Visual Studio</a> (2015 或更新版本).</p>
+</li>
+<li><p class="first">下载 <a class="reference external" href="https://github.com/Microsoft/LightGBM/archive/master.zip">zip archive</a> 并且 unzip（解压）它.</p>
+</li>
+<li><p class="first">定位到 <code class="docutils literal notranslate"><span class="pre">LightGBM-master/windows</span></code> 文件夹.</p>
+</li>
+<li><p class="first">使用 Visual Studio 打开 <code class="docutils literal notranslate"><span class="pre">LightGBM.sln</span></code> 文件, 选择 <code class="docutils literal notranslate"><span class="pre">Release_mpi</span></code> 配置并且点击 <code class="docutils literal notranslate"><span class="pre">BUILD</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">Solution</span> <span class="pre">(Ctrl+Shift+B)</span></code>.</p>
+<p>如果遇到有关 <strong>Platform Toolset</strong> 的错误, 定位到 <code class="docutils literal notranslate"><span class="pre">PROJECT</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Properties</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Configuration</span> <span class="pre">Properties</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">General</span></code> 并且选择安装 toolset 到你的机器上.</p>
+</li>
+</ol>
+<p>该 exe 文件可以在 <code class="docutils literal notranslate"><span class="pre">LightGBM-master/windows/x64/Release_mpi</span></code> 文件夹中找到.</p>
+</div>
+<div class="section" id="id5">
+<h4>使用命令行<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">需要先安装 <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=49926">MS MPI</a> . 需要 <code class="docutils literal notranslate"><span class="pre">msmpisdk.msi</span></code> 和 <code class="docutils literal notranslate"><span class="pre">MSMpiSetup.exe</span></code>.</p>
+</li>
+<li><p class="first">安装 <a class="reference external" href="https://git-scm.com/download/win">Git for Windows</a>, <a class="reference external" href="https://cmake.org/">CMake</a> (3.8 或更新版本) 和 <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">MSBuild</a> (MSBuild 是非必要的, 如果已安装 <strong>Visual Studio</strong> (2015 或更新版本)).</p>
+</li>
+<li><p class="first">运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span>
+<span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DCMAKE_GENERATOR_PLATFORM</span><span class="o">=</span><span class="n">x64</span> <span class="o">-</span><span class="n">DUSE_MPI</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">target</span> <span class="n">ALL_BUILD</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>这些 exe 和 dll 文件可以在 <code class="docutils literal notranslate"><span class="pre">LightGBM/Release</span></code> 文件夹中找到.</p>
+<p><strong>注意</strong>: Build MPI version 通过 <strong>MinGW</strong> 来构建 MPI 版本的不支持的, 由于它里面缺失了 MPI 库.</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>Linux<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>需要先安装 <a class="reference external" href="https://www.open-mpi.org/">Open MPI</a> .</p>
+<p>然后运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DUSE_MPI</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: glibc &gt;= 2.14 是必要的.</p>
+</div>
+<div class="section" id="id7">
+<h3>OSX<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>先安装 <strong>gcc</strong> 和 <strong>Open MPI</strong> :</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">openmpi</span>
+<span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span>
+<span class="n">brew</span> <span class="n">install</span> <span class="n">gcc</span> <span class="o">--</span><span class="n">without</span><span class="o">-</span><span class="n">multilib</span>
+</pre></div>
+</div>
+<p>然后运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">export</span> <span class="n">CXX</span><span class="o">=</span><span class="n">g</span><span class="o">++-</span><span class="mi">7</span> <span class="n">CC</span><span class="o">=</span><span class="n">gcc</span><span class="o">-</span><span class="mi">7</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DUSE_MPI</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="build-gpu">
+<h2>Build GPU 版本<a class="headerlink" href="#build-gpu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Linux<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>在编译前应该先安装以下依赖:</p>
+<ul>
+<li><p class="first">OpenCL 1.2 headers and libraries, 它们通常由 GPU 制造商提供.</p>
+<p>The generic OpenCL ICD packages (for example, Debian package <code class="docutils literal notranslate"><span class="pre">cl-icd-libopencl1</span></code> and <code class="docutils literal notranslate"><span class="pre">cl-icd-opencl-dev</span></code>) can also be used.</p>
+</li>
+<li><p class="first">libboost 1.56 或更新版本 (1.61 或最新推荐的版本).</p>
+<p>We use Boost.Compute as the interface to GPU, which is part of the Boost library since version 1.61. However, since we include the source code of Boost.Compute as a submodule, we only require the host has Boost 1.56 or later installed. We also use Boost.Align for memory allocation. Boost.Compute requires Boost.System and Boost.Filesystem to store offline kernel cache.</p>
+<p>The following Debian packages should provide necessary Boost libraries: <code class="docutils literal notranslate"><span class="pre">libboost-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">libboost-system-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">libboost-filesystem-dev</span></code>.</p>
+</li>
+<li><p class="first">CMake 3.2 或更新版本.</p>
+</li>
+</ul>
+<p>要构建 LightGBM GPU 版本, 运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DUSE_GPU</span><span class="o">=</span><span class="mi">1</span> <span class="o">..</span>
+<span class="c1"># if you have installed the NVIDIA OpenGL, please using following instead</span>
+<span class="c1"># sudo cmake -DUSE_GPU=1 -DOpenCL_LIBRARY=/usr/local/cuda/lib64/libOpenCL.so -OpenCL_INCLUDE_DIR=/usr/local/cuda/include/ ..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>Windows<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>如果使用 <strong>MinGW</strong>, 该构建过程类似于 Linux 上的构建. 相关的更多细节请参阅 <a class="reference external" href="./GPU-Windows.rst">GPU Windows 平台上的编译</a> .</p>
+<p>以下构建过程适用于 MSVC (Microsoft Visual C++) 构建.</p>
+<ol class="arabic">
+<li><p class="first">安装 <a class="reference external" href="https://git-scm.com/download/win">Git for Windows</a>, <a class="reference external" href="https://cmake.org/">CMake</a> (3.8 or higher) 和 <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">MSBuild</a> (MSBuild 是非必要的, 如果已安装 <strong>Visual Studio</strong> (2015 或更新版本)).</p>
+</li>
+<li><p class="first">针对 Windows 平台安装 <strong>OpenCL</strong> . 安装取决于你的 GPU 显卡品牌 (NVIDIA, AMD, Intel).</p>
+<ul class="simple">
+<li>要运行在 Intel 上, 获取 <a class="reference external" href="https://software.intel.com/en-us/articles/opencl-drivers">Intel SDK for OpenCL</a>.</li>
+<li>要运行在 AMD 上, 获取 <a class="reference external" href="http://developer.amd.com/amd-accelerated-parallel-processing-app-sdk/">AMD APP SDK</a>.</li>
+<li>要运行在 NVIDIA 上, 获取 <a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA Toolkit</a>.</li>
+</ul>
+</li>
+<li><p class="first">安装 <a class="reference external" href="https://sourceforge.net/projects/boost/files/boost-binaries/1.64.0/">Boost Binary</a>.</p>
+<p><strong>注意</strong>: 要匹配你的 Visual C++ 版本:</p>
+<p>Visual Studio 2015 -&gt; <code class="docutils literal notranslate"><span class="pre">msvc-14.0-64.exe</span></code>,</p>
+<p>Visual Studio 2017 -&gt; <code class="docutils literal notranslate"><span class="pre">msvc-14.1-64.exe</span></code>.</p>
+</li>
+<li><p class="first">运行以下命令:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Set</span> <span class="n">BOOST_ROOT</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">local</span>\<span class="n">boost_1_64_0</span>\
+<span class="n">Set</span> <span class="n">BOOST_LIBRARYDIR</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">local</span>\<span class="n">boost_1_64_0</span>\<span class="n">lib64</span><span class="o">-</span><span class="n">msvc</span><span class="o">-</span><span class="mf">14.0</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Microsoft</span><span class="o">/</span><span class="n">LightGBM</span>
+<span class="n">cd</span> <span class="n">LightGBM</span>
+<span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DCMAKE_GENERATOR_PLATFORM</span><span class="o">=</span><span class="n">x64</span> <span class="o">-</span><span class="n">DUSE_GPU</span><span class="o">=</span><span class="mi">1</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">target</span> <span class="n">ALL_BUILD</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+</pre></div>
+</div>
+<p><strong>注意</strong>: <code class="docutils literal notranslate"><span class="pre">C:\local\boost_1_64_0\</span></code> 和 <code class="docutils literal notranslate"><span class="pre">C:\local\boost_1_64_0\lib64-msvc-14.0</span></code> 是你 Boost 二进制文件的位置. 你还可以将它们设置为环境变量, 以在构建时避免 <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">...</span></code> 命令.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="protobuf">
+<h3>Protobuf 支持<a class="headerlink" href="#protobuf" title="Permalink to this headline">¶</a></h3>
+<p>如果想要使用 protobuf 来保存和加载模型, 请先安装 <a class="reference external" href="https://github.com/google/protobuf/blob/master/src/README.md">protobuf c++ version</a> .
+然后使用 USE_PROTO=ON 配置来运行 cmake 命令, 例如:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DUSE_PROTO</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>然后在保存或加载模型时, 可以在参数中使用 <code class="docutils literal notranslate"><span class="pre">model_format=proto</span></code>.</p>
+<p><strong>注意</strong>: 针对 windows 用户, 它只对 mingw 进行了测试.</p>
+</div>
+<div class="section" id="id10">
+<h3>Docker<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>请参阅 <a class="reference external" href="https://github.com/Microsoft/LightGBM/tree/master/docker/gpu">GPU Docker 文件夹</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Quick-Start.html" class="btn btn-neutral float-right" title="快速入门指南" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="欢迎来到 LightGBM 的中文文档!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>

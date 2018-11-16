@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>进阶主题 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LightGBM FAQ 常见问题解答" href="FAQ.html" />
+    <link rel="prev" title="LightGBM GPU 教程" href="GPU-Tutorial.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-Intro.html">Python 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters.html">参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parallel-Learning-Guide.html">并行学习指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">进阶主题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">缺失值的处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">类别特征的支持</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lambdarank">LambdaRank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">参数优化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">并行学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gpu">GPU 的支持</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gcc-mingw-nix">GCC 用户的建议 (MinGW, *nix)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>进阶主题</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Advanced-Topics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>进阶主题<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>缺失值的处理<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>LightGBM 通过默认的方式来处理缺失值，你可以通过设置 <code class="docutils literal notranslate"><span class="pre">use_missing=false</span></code> 来使其无效。</li>
+<li>LightGBM 通过默认的的方式用 NA (NaN) 去表示缺失值，你可以通过设置 <code class="docutils literal notranslate"><span class="pre">zero_as_missing=true</span></code> 将其变为零。</li>
+<li>当设置 <code class="docutils literal notranslate"><span class="pre">zero_as_missing=false</span></code> （默认）时，在稀疏矩阵里 (和LightSVM) ，没有显示的值视为零。</li>
+<li>当设置 <code class="docutils literal notranslate"><span class="pre">zero_as_missing=true</span></code> 时， NA 和 0 （包括在稀疏矩阵里，没有显示的值）视为缺失。</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>类别特征的支持<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>当直接输入类别特征，LightGBM 能提供良好的精确度。不像简单的 one-hot 编码，LightGBM 可以找到类别特征的最优分割。
+相对于 one-hot 编码结果，LightGBM 可以提供更加准确的最优分割。</li>
+<li>用 <code class="docutils literal notranslate"><span class="pre">categorical_feature</span></code> 指定类别特征
+参考 <a class="reference external" href="./Parameters.rst">Parameters</a> 的参数 <code class="docutils literal notranslate"><span class="pre">categorical_feature</span></code></li>
+<li>需要转换为 int 类型，并且只支持非负数。
+建议转换到连续的数字范围。</li>
+<li>使用 <code class="docutils literal notranslate"><span class="pre">min_data_per_group</span></code>, <code class="docutils literal notranslate"><span class="pre">cat_smooth</span></code> 去处理过拟合（当 <code class="docutils literal notranslate"><span class="pre">#data</span></code> 比较小，或者 <code class="docutils literal notranslate"><span class="pre">#category</span></code> 比较大）</li>
+<li>对于类别数量很大的类别特征(<code class="docutils literal notranslate"><span class="pre">#category</span></code> 比较大), 最好把它转化为数值特征。</li>
+</ul>
+</div>
+<div class="section" id="lambdarank">
+<h2>LambdaRank<a class="headerlink" href="#lambdarank" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>标签应该是 int 类型，较大的数字代表更高的相关性（例如：0：坏，1：公平，2：好，3：完美）。</li>
+<li>使用 <code class="docutils literal notranslate"><span class="pre">label_gain</span></code> 设置每个标签对应的增益（gain）。</li>
+<li>使用 <code class="docutils literal notranslate"><span class="pre">max_position</span></code> 设置 NDCG 优化位置。</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>参数优化<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>参考 <a class="reference external" href="./Parameters-Tuning.rst">参数优化</a> .</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>并行学习<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>参考 <a class="reference external" href="./Parallel-Learning-Guide.rst">并行学习指南</a> .</li>
+</ul>
+</div>
+<div class="section" id="gpu">
+<h2>GPU 的支持<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>参考 <a class="reference external" href="./GPU-Tutorial.rst">GPU 教程</a> 和 <a class="reference external" href="./GPU-Targets.rst">GPU Targets</a></li>
+</ul>
+</div>
+<div class="section" id="gcc-mingw-nix">
+<h2>GCC 用户的建议 (MinGW, *nix)<a class="headerlink" href="#gcc-mingw-nix" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>参考 <a class="reference external" href="./gcc-Tips.rst">gcc 建议</a>.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FAQ.html" class="btn btn-neutral float-right" title="LightGBM FAQ 常见问题解答" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GPU-Tutorial.html" class="btn btn-neutral" title="LightGBM GPU 教程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>

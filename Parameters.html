@@ -1,0 +1,910 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>参数 &mdash; LightGBM 中文文档  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="参数优化" href="Parameters-Tuning.html" />
+    <link rel="prev" title="实验" href="Experiments.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LightGBM 中文文档
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">内容目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-Intro.html">Python 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Experiments.html">实验</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">参数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">参数格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">核心参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">学习控制参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#io">IO 参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">目标参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">度量参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">网络参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gpu">GPU 参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">模型参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">其他</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">持续训练输入分数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">权重数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">查询数据</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Parameters-Tuning.html">参数优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python-API.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parallel-Learning-Guide.html">并行学习指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Tutorial.html">GPU 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced-Topics.html">进阶主题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project-contributors.html">项目贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apachecn-learning-group.html">组织学习交流群</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Performance.html">GPU Tuning Guide and Performance Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Targets.html">GPU SDK 相关以及设备对应表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPU-Windows.html">GPU Windows Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcc-Tips.html">Recommendations When Using gcc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightGBM 中文文档</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>参数</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Parameters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>参数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>这个页面包含了 LightGBM 的所有参数.</p>
+<p><strong>一些有用的链接列表</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="./Python-API.rst">Python API</a></li>
+<li><a class="reference external" href="./Parameters-Tuning.rst">Parameters Tuning</a></li>
+</ul>
+<p><strong>外部链接</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="https://sites.google.com/view/lauraepp/parameters">Laurae++ Interactive Documentation</a></li>
+</ul>
+<p><strong>更新于 08/04/2017</strong></p>
+<p>以下参数的default已经修改:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">min_data_in_leaf</span></code> = 100 =&gt; 20</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_sum_hessian_in_leaf</span></code> = 10 =&gt; 1e-3</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_leaves</span></code> = 127 =&gt; 31</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_iterations</span></code> = 10 =&gt; 100</li>
+</ul>
+<div class="section" id="id2">
+<h2>参数格式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>参数的格式为 <code class="docutils literal notranslate"><span class="pre">key1=value1</span> <span class="pre">key2=value2</span> <span class="pre">...</span></code>.
+并且, 在配置文件和命令行中均可以设置参数.
+使用命令行设置参数时, 在 <code class="docutils literal notranslate"><span class="pre">=</span></code> 前后都不应该有空格.
+使用配置文件设置参数时, 一行只能包含一个参数. 你可以使用 <code class="docutils literal notranslate"><span class="pre">#</span></code> 进行注释.</p>
+<p>如果一个参数在命令行和配置文件中均出现了, LightGBM 将会使用命令行中的该参数.</p>
+</div>
+<div class="section" id="id3">
+<h2>核心参数<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">config_file</span></code><ul>
+<li>配置文件的路径</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">task</span></code>, default=<code class="docutils literal notranslate"><span class="pre">train</span></code>, type=enum, options=<code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code>, <code class="docutils literal notranslate"><span class="pre">convert_model</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">train</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">training</span></code>, for training</li>
+<li><code class="docutils literal notranslate"><span class="pre">predict</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">prediction</span></code>, <code class="docutils literal notranslate"><span class="pre">test</span></code>, for prediction.</li>
+<li><code class="docutils literal notranslate"><span class="pre">convert_model</span></code>, 要将模型文件转换成 if-else 格式, 可以查看这个链接获取更多信息 <a class="reference external" href="#convert-model-parameters">Convert model parameters</a></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">application</span></code>, default=<code class="docutils literal notranslate"><span class="pre">regression</span></code>, type=enum,
+options=<code class="docutils literal notranslate"><span class="pre">regression</span></code>, <code class="docutils literal notranslate"><span class="pre">regression_l1</span></code>, <code class="docutils literal notranslate"><span class="pre">huber</span></code>, <code class="docutils literal notranslate"><span class="pre">fair</span></code>, <code class="docutils literal notranslate"><span class="pre">poisson</span></code>, <code class="docutils literal notranslate"><span class="pre">quantile</span></code>, <code class="docutils literal notranslate"><span class="pre">quantile_l2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">binary</span></code>, <code class="docutils literal notranslate"><span class="pre">multiclass</span></code>, <code class="docutils literal notranslate"><span class="pre">multiclassova</span></code>, <code class="docutils literal notranslate"><span class="pre">xentropy</span></code>, <code class="docutils literal notranslate"><span class="pre">xentlambda</span></code>, <code class="docutils literal notranslate"><span class="pre">lambdarank</span></code>,
+alias=<code class="docutils literal notranslate"><span class="pre">objective</span></code>, <code class="docutils literal notranslate"><span class="pre">app</span></code><ul>
+<li>regression application<ul>
+<li><code class="docutils literal notranslate"><span class="pre">regression_l2</span></code>, L2 loss, alias=<code class="docutils literal notranslate"><span class="pre">regression</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error</span></code>, <code class="docutils literal notranslate"><span class="pre">mse</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">regression_l1</span></code>, L1 loss, alias=<code class="docutils literal notranslate"><span class="pre">mean_absolute_error</span></code>, <code class="docutils literal notranslate"><span class="pre">mae</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">huber</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Huber_loss">Huber loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">fair</span></code>, <a class="reference external" href="https://www.kaggle.com/c/allstate-claims-severity/discussion/24520">Fair loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">poisson</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_regression">Poisson regression</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">quantile</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_regression">Quantile regression</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">quantile_l2</span></code>, 类似于 <code class="docutils literal notranslate"><span class="pre">quantile</span></code>, 但是使用了 L2 loss</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">binary</span></code>, binary <a class="reference external" href="https://www.kaggle.com/wiki/LogLoss">log loss</a> classification application</li>
+<li>multi-class classification application<ul>
+<li><code class="docutils literal notranslate"><span class="pre">multiclass</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> 目标函数, 应该设置好 <code class="docutils literal notranslate"><span class="pre">num_class</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">multiclassova</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Multiclass_classification#One-vs.-rest">One-vs-All</a> 二分类目标函数, 应该设置好 <code class="docutils literal notranslate"><span class="pre">num_class</span></code></li>
+</ul>
+</li>
+<li>cross-entropy application<ul>
+<li><code class="docutils literal notranslate"><span class="pre">xentropy</span></code>, 目标函数为 cross-entropy (同时有可选择的线性权重), alias=<code class="docutils literal notranslate"><span class="pre">cross_entropy</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">xentlambda</span></code>, 替代参数化的 cross-entropy, alias=<code class="docutils literal notranslate"><span class="pre">cross_entropy_lambda</span></code></li>
+<li>标签是 [0, 1] 间隔内的任意值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">lambdarank</span></code>, <a class="reference external" href="https://papers.nips.cc/paper/2971-learning-to-rank-with-nonsmooth-cost-functions.pdf">lambdarank</a> application<ul>
+<li>在 lambdarank 任务中标签应该为 <code class="docutils literal notranslate"><span class="pre">int</span></code> type, 数值越大代表相关性越高 (e.g. 0:bad, 1:fair, 2:good, 3:perfect)</li>
+<li><code class="docutils literal notranslate"><span class="pre">label_gain</span></code> 可以被用来设置对应的标签的增益 (权重)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">boosting</span></code>, default=<code class="docutils literal notranslate"><span class="pre">gbdt</span></code>, type=enum,
+options=<code class="docutils literal notranslate"><span class="pre">gbdt</span></code>, <code class="docutils literal notranslate"><span class="pre">rf</span></code>, <code class="docutils literal notranslate"><span class="pre">dart</span></code>, <code class="docutils literal notranslate"><span class="pre">goss</span></code>,
+alias=<code class="docutils literal notranslate"><span class="pre">boost</span></code>, <code class="docutils literal notranslate"><span class="pre">boosting_type</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">gbdt</span></code>, 传统的梯度提升决策树</li>
+<li><code class="docutils literal notranslate"><span class="pre">rf</span></code>, Random Forest (随机森林)</li>
+<li><code class="docutils literal notranslate"><span class="pre">dart</span></code>, <a class="reference external" href="https://arxiv.org/abs/1505.01866">Dropouts meet Multiple Additive Regression Trees</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">goss</span></code>, Gradient-based One-Side Sampling (基于梯度的单侧采样)</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">train_data</span></code><ul>
+<li>训练数据, LightGBM 将会使用这个数据进行训练</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">valid</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=multi-string, alias=<code class="docutils literal notranslate"><span class="pre">test</span></code>, <code class="docutils literal notranslate"><span class="pre">valid_data</span></code>, <code class="docutils literal notranslate"><span class="pre">test_data</span></code><ul>
+<li>验证/测试 数据, LightGBM 将输出这些数据的度量</li>
+<li>支持多验证数据集, 以 <code class="docutils literal notranslate"><span class="pre">,</span></code> 分割</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_iterations</span></code>, default=<code class="docutils literal notranslate"><span class="pre">100</span></code>, type=int,
+alias=<code class="docutils literal notranslate"><span class="pre">num_iteration</span></code>, <code class="docutils literal notranslate"><span class="pre">num_tree</span></code>, <code class="docutils literal notranslate"><span class="pre">num_trees</span></code>, <code class="docutils literal notranslate"><span class="pre">num_round</span></code>, <code class="docutils literal notranslate"><span class="pre">num_rounds</span></code>, <code class="docutils literal notranslate"><span class="pre">num_boost_round</span></code><ul>
+<li>boosting 的迭代次数</li>
+<li><strong>Note</strong>: 对于 Python/R 包, <strong>这个参数是被忽略的</strong>,
+使用 <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">cv</span></code> 的输入参数 <code class="docutils literal notranslate"><span class="pre">num_boost_round</span></code> (Python) or <code class="docutils literal notranslate"><span class="pre">nrounds</span></code> (R) 来代替</li>
+<li><strong>Note</strong>: 在内部, LightGBM 对于 <code class="docutils literal notranslate"><span class="pre">multiclass</span></code> 问题设置 <code class="docutils literal notranslate"><span class="pre">num_class</span> <span class="pre">*</span> <span class="pre">num_iterations</span></code> 棵树</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.1</span></code>, type=double, alias=<code class="docutils literal notranslate"><span class="pre">shrinkage_rate</span></code><ul>
+<li>shrinkage rate (收缩率)，学习率</li>
+<li>在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 中, 它还影响了 dropped trees 的归一化权重</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_leaves</span></code>, default=<code class="docutils literal notranslate"><span class="pre">31</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">num_leaf</span></code><ul>
+<li>每个决策树的最大叶子数量</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">tree_learner</span></code>, default=<code class="docutils literal notranslate"><span class="pre">serial</span></code>, type=enum, options=<code class="docutils literal notranslate"><span class="pre">serial</span></code>, <code class="docutils literal notranslate"><span class="pre">feature</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">voting</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">tree</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">serial</span></code>, 单台机器的 tree learner</li>
+<li><code class="docutils literal notranslate"><span class="pre">feature</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">feature_parallel</span></code>, 特征并行的 tree learner</li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">data_parallel</span></code>, 数据并行的 tree learner</li>
+<li><code class="docutils literal notranslate"><span class="pre">voting</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">voting_parallel</span></code>, 投票并行的 tree learner</li>
+<li>请阅读 <a class="reference external" href="./Parallel-Learning-Guide.rst">并行学习指南</a> 来了解更多细节</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_threads</span></code>, default=<code class="docutils literal notranslate"><span class="pre">OpenMP_default</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">num_thread</span></code>, <code class="docutils literal notranslate"><span class="pre">nthread</span></code><ul>
+<li>LightGBM 的线程数</li>
+<li>为了更快的速度, 将此设置为真正的 CPU 内核数, 而不是线程的数量 (大多数 CPU 使用超线程来使每个 CPU 内核生成 2 个线程)</li>
+<li>当你的数据集小的时候不要将它设置的过大 (比如, 当数据集有 10,000 行时不要使用 64 线程)</li>
+<li>请注意, 任务管理器或任何类似的 CPU 监视工具可能会报告未被充分利用的内核. <strong>这是正常的</strong></li>
+<li>对于并行学习, 不应该使用全部的 CPU 内核, 因为这会导致网络性能不佳</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">device</span></code>, default=<code class="docutils literal notranslate"><span class="pre">cpu</span></code>, options=<code class="docutils literal notranslate"><span class="pre">cpu</span></code>, <code class="docutils literal notranslate"><span class="pre">gpu</span></code><ul>
+<li>你可以使用 GPU 来获得更快的学习速度</li>
+<li><strong>Note</strong>: 建议使用较小的 <code class="docutils literal notranslate"><span class="pre">max_bin</span></code> (e.g. 63) 来获得更快的速度</li>
+<li><strong>Note</strong>: 为了加快学习速度,  GPU 默认使用32位浮点数来求和.
+你可以设置 <code class="docutils literal notranslate"><span class="pre">gpu_use_dp=true</span></code> 来启用64位浮点数, 但是它会使训练速度降低</li>
+<li><strong>Note</strong>: 请参考 <a class="reference external" href="./Installation-Guide.rst#build-gpu-version">安装指南</a> 来构建 GPU 版本</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>学习控制参数<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">max_depth</span></code>, default=<code class="docutils literal notranslate"><span class="pre">-1</span></code>, type=int<ul>
+<li>限制树模型的最大深度. 这可以在 <code class="docutils literal notranslate"><span class="pre">#data</span></code> 小的情况下防止过拟合. 树仍然通过 leaf-wise 生长.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">0</span></code> 意味着没有限制.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_data_in_leaf</span></code>, default=<code class="docutils literal notranslate"><span class="pre">20</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">min_data_per_leaf</span></code> , <code class="docutils literal notranslate"><span class="pre">min_data</span></code>, <code class="docutils literal notranslate"><span class="pre">min_child_samples</span></code><ul>
+<li>一个叶子上数据的最小数量. 可以用来防止过拟合.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_sum_hessian_in_leaf</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1e-3</span></code>, type=double,
+alias=<code class="docutils literal notranslate"><span class="pre">min_sum_hessian_per_leaf</span></code>, <code class="docutils literal notranslate"><span class="pre">min_sum_hessian</span></code>, <code class="docutils literal notranslate"><span class="pre">min_hessian</span></code>, <code class="docutils literal notranslate"><span class="pre">min_child_weight</span></code><ul>
+<li>一个叶子上的最小 hessian 和. 类似于 <code class="docutils literal notranslate"><span class="pre">min_data_in_leaf</span></code>, 可以用来防止过拟合.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">feature_fraction</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, type=double, <code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;</span> <span class="pre">feature_fraction</span> <span class="pre">&lt;</span> <span class="pre">1.0</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">sub_feature</span></code>, <code class="docutils literal notranslate"><span class="pre">colsample_bytree</span></code><ul>
+<li>如果 <code class="docutils literal notranslate"><span class="pre">feature_fraction</span></code> 小于 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>,  LightGBM 将会在每次迭代中随机选择部分特征.
+例如, 如果设置为 <code class="docutils literal notranslate"><span class="pre">0.8</span></code>, 将会在每棵树训练之前选择 80% 的特征</li>
+<li>可以用来加速训练</li>
+<li>可以用来防止过拟合</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">feature_fraction_seed</span></code>, default=<code class="docutils literal notranslate"><span class="pre">2</span></code>, type=int<ul>
+<li><code class="docutils literal notranslate"><span class="pre">feature_fraction</span></code> 的随机数种子</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">bagging_fraction</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, type=double, <code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;</span> <span class="pre">bagging_fraction</span> <span class="pre">&lt;</span> <span class="pre">1.0</span></code>, alias=<code class="docutils literal notranslate"><span class="pre">sub_row</span></code>, <code class="docutils literal notranslate"><span class="pre">subsample</span></code><ul>
+<li>类似于 <code class="docutils literal notranslate"><span class="pre">feature_fraction</span></code>, 但是它将在不进行重采样的情况下随机选择部分数据</li>
+<li>可以用来加速训练</li>
+<li>可以用来防止过拟合</li>
+<li><strong>Note</strong>: 为了启用 bagging, <code class="docutils literal notranslate"><span class="pre">bagging_freq</span></code> 应该设置为非零值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">bagging_freq</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">subsample_freq</span></code><ul>
+<li>bagging 的频率, <code class="docutils literal notranslate"><span class="pre">0</span></code> 意味着禁用 bagging. <code class="docutils literal notranslate"><span class="pre">k</span></code> 意味着每 <code class="docutils literal notranslate"><span class="pre">k</span></code> 次迭代执行bagging</li>
+<li><strong>Note</strong>: 为了启用 bagging, <code class="docutils literal notranslate"><span class="pre">bagging_fraction</span></code> 设置适当</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">bagging_seed</span></code> , default=<code class="docutils literal notranslate"><span class="pre">3</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">bagging_fraction_seed</span></code><ul>
+<li>bagging 用的随机数种子</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">early_stopping_round</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code>, <code class="docutils literal notranslate"><span class="pre">early_stopping</span></code><ul>
+<li>如果一个验证集的精度在 连续的``early_stopping_round`` 中没有提升, 将停止训练</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">lambda_l1</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0</span></code>, type=double, alias=<code class="docutils literal notranslate"><span class="pre">reg_alpha</span></code><ul>
+<li>L1 正则</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">lambda_l2</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0</span></code>, type=double, alias=<code class="docutils literal notranslate"><span class="pre">reg_lambda</span></code><ul>
+<li>L2 正则</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_split_gain</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0</span></code>, type=double, alias=<code class="docutils literal notranslate"><span class="pre">min_gain_to_split</span></code><ul>
+<li>执行切分的最小增益</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">drop_rate</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.1</span></code>, type=double<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 时使用</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">skip_drop</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.5</span></code>, type=double<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 时使用, 跳过 drop 的概率</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_drop</span></code>, default=<code class="docutils literal notranslate"><span class="pre">50</span></code>, type=int<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 时使用, 一次迭代中删除树的最大数量</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;=0</span></code> 意味着没有限制</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">uniform_drop</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 时使用, 如果想要均匀的删除, 将它设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">xgboost_dart_mode</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 时使用, 如果想要使用 xgboost dart 模式, 将它设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">drop_seed</span></code>, default=<code class="docutils literal notranslate"><span class="pre">4</span></code>, type=int<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">dart</span></code> 时使用, 选择 dropping models 的随机数种子</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">top_rate</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.2</span></code>, type=double<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">goss</span></code> 时使用, 大梯度数据的保留比例</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">other_rate</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.1</span></code>, type=int<ul>
+<li>仅仅在 <code class="docutils literal notranslate"><span class="pre">goss</span></code> 时使用, 小梯度数据的保留比例</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_data_per_group</span></code>, default=<code class="docutils literal notranslate"><span class="pre">100</span></code>, type=int<ul>
+<li>每个类别特征组包含的最小数据量，用于降低低频特征的影响。</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_cat_threshold</span></code>, default=<code class="docutils literal notranslate"><span class="pre">32</span></code>, type=int<ul>
+<li>用于类别特征</li>
+<li>限制类别特征的最大阈值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">cat_smooth</span></code>, default=<code class="docutils literal notranslate"><span class="pre">10</span></code>, type=double<ul>
+<li>用于类别特征</li>
+<li>这可以降低噪声在类别特征中的影响, 尤其是对数据很少的类别</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">cat_l2</span></code>, default=<code class="docutils literal notranslate"><span class="pre">10</span></code>, type=double<ul>
+<li>类别特征切分中的 L2 正则</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_cat_to_onehot</span></code>, default=<code class="docutils literal notranslate"><span class="pre">4</span></code>, type=int<ul>
+<li>当一个特征的类别数小于或等于 <code class="docutils literal notranslate"><span class="pre">max_cat_to_onehot</span></code> 时, one-vs-other 切分算法将会被使用</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">top_k</span></code>, default=<code class="docutils literal notranslate"><span class="pre">20</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">topk</span></code><ul>
+<li>被使用在 <a class="reference external" href="./Parallel-Learning-Guide.rst#choose-appropriate-parallel-algorithm">Voting parallel</a> 中</li>
+<li>将它设置为更大的值可以获得更精确的结果, 但会减慢训练速度</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="io">
+<h2>IO 参数<a class="headerlink" href="#io" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">max_bin</span></code>, default=<code class="docutils literal notranslate"><span class="pre">255</span></code>, type=int<ul>
+<li>对特征进行binned（分桶,离散化）的最大上限
+较小的`max_bin`可能会降低训练的准确性, 但是会提高泛化能力（防止过拟合）</li>
+<li>LightGBM 将根据 <code class="docutils literal notranslate"><span class="pre">max_bin</span></code> 自动压缩内存。
+例如, 如果 maxbin=255, 那么 LightGBM 将使用 uint8t 的特性值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">min_data_in_bin</span></code>, default=<code class="docutils literal notranslate"><span class="pre">3</span></code>, type=int
+-  每个bin包含的最小样本量, 使用这个参数防止每个bin里面的样本太少（防止过拟合）</li>
+<li><code class="docutils literal notranslate"><span class="pre">data_random_seed</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1</span></code>, type=int<ul>
+<li>并行学习数据分隔中的随机种子 (在feature parallel模式不起作用)</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">output_model</span></code>, default=<code class="docutils literal notranslate"><span class="pre">LightGBM_model.txt</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">model_output</span></code>, <code class="docutils literal notranslate"><span class="pre">model_out</span></code><ul>
+<li>训练完成后输出的模型文件名</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">input_model</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">model_input</span></code>, <code class="docutils literal notranslate"><span class="pre">model_in</span></code><ul>
+<li>输入模型的文件名</li>
+<li>对于 <code class="docutils literal notranslate"><span class="pre">prediction</span></code> 任务, 该模型将用于预测数据</li>
+<li>对于 <code class="docutils literal notranslate"><span class="pre">train</span></code> 任务, 训练将从该模型继续</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">output_result</span></code>, default=<code class="docutils literal notranslate"><span class="pre">LightGBM_predict_result.txt</span></code>,
+type=string, alias=<code class="docutils literal notranslate"><span class="pre">predict_result</span></code>, <code class="docutils literal notranslate"><span class="pre">prediction_result</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">prediction</span></code> 任务的预测结果文件名</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">pre_partition</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">is_pre_partition</span></code><ul>
+<li>用于并行学习(在特征并行中不起作用)</li>
+<li><code class="docutils literal notranslate"><span class="pre">true</span></code> 如果训练数据 pre-partitioned, 不同的机器使用不同的分区</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">is_sparse</span></code>, default=<code class="docutils literal notranslate"><span class="pre">true</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">is_enable_sparse</span></code>, <code class="docutils literal notranslate"><span class="pre">enable_sparse</span></code><ul>
+<li>用于 enable/disable 稀疏优化. 设置 <code class="docutils literal notranslate"><span class="pre">false</span></code> 就禁用稀疏优化</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">two_round</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">two_round_loading</span></code>, <code class="docutils literal notranslate"><span class="pre">use_two_round_loading</span></code><ul>
+<li>默认情况下, LightGBM 将把数据文件映射到内存, 并从内存加载特性。
+这将提供更快的数据加载速度。但当数据文件很大时, 内存可能会耗尽</li>
+<li>如果数据文件太大, 不能放在内存中, 就把它设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">save_binary</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">is_save_binary</span></code>, <code class="docutils literal notranslate"><span class="pre">is_save_binary_file</span></code><ul>
+<li>如果设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> LightGBM 则将数据集(包括验证数据)保存到二进制文件中。
+可以加快数据加载速度。</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">verbosity</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">verbose</span></code><ul>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;0</span></code> = 致命的,
+<code class="docutils literal notranslate"><span class="pre">=0</span></code> = 错误 (警告),
+<code class="docutils literal notranslate"><span class="pre">&gt;0</span></code> = 信息</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">header</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">has_header</span></code><ul>
+<li>如果输入数据有标识头（列名）, 则在此处设置 <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">label</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">label_column</span></code><ul>
+<li>指定标签列</li>
+<li>用于索引的数字, e.g. <code class="docutils literal notranslate"><span class="pre">label=0</span></code> 意味着 column_0 是标签列</li>
+<li>为列名添加前缀 <code class="docutils literal notranslate"><span class="pre">name:</span></code> , e.g. <code class="docutils literal notranslate"><span class="pre">label=name:is_click</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">weight</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">weight_column</span></code><ul>
+<li>列的指定</li>
+<li>用于索引的数字, e.g. <code class="docutils literal notranslate"><span class="pre">weight=0</span></code> 表示 column_0 是weight列</li>
+<li>为列名添加前缀 <code class="docutils literal notranslate"><span class="pre">name:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">weight=name:weight</span></code></li>
+<li><strong>Note</strong>: 索引从 <code class="docutils literal notranslate"><span class="pre">0</span></code> 开始.
+当传递 type 为索引时, 它不计算标签列, 例如当标签为 0 时, 权重为列 1, 正确的参数是权重值为 0</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">query</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">query_column</span></code>, <code class="docutils literal notranslate"><span class="pre">group</span></code>, <code class="docutils literal notranslate"><span class="pre">group_column</span></code><ul>
+<li>指定 query/group ID 列</li>
+<li>用数字做索引, e.g. <code class="docutils literal notranslate"><span class="pre">query=0</span></code> 意味着 column_0 是这个query的 Id</li>
+<li>为列名添加前缀 <code class="docutils literal notranslate"><span class="pre">name:</span></code> , e.g. <code class="docutils literal notranslate"><span class="pre">query=name:query_id</span></code></li>
+<li><strong>Note</strong>: 数据应按照 query_id.
+索引从 <code class="docutils literal notranslate"><span class="pre">0</span></code> 开始.
+当传递 type 为索引时, 它不计算标签列, 例如当标签为列 0, 查询 id 为列 1 时, 正确的参数是查询 =0</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">ignore_column</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">ignore_feature</span></code>, <code class="docutils literal notranslate"><span class="pre">blacklist</span></code><ul>
+<li>在训练中指定一些被忽略的列</li>
+<li>用数字做索引, e.g. <code class="docutils literal notranslate"><span class="pre">ignore_column=0,1,2</span></code> 意味着 column_0, column_1 和 column_2 将被忽略</li>
+<li>为列名添加前缀 <code class="docutils literal notranslate"><span class="pre">name:</span></code> , e.g. <code class="docutils literal notranslate"><span class="pre">ignore_column=name:c1,c2,c3</span></code> 意味着 c1, c2 和 c3 将被忽略</li>
+<li><strong>Note</strong>: 只在从文件直接加载数据的情况下工作</li>
+<li><strong>Note</strong>: 索引从 <code class="docutils literal notranslate"><span class="pre">0</span></code> 开始. 它不包括标签栏</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">categorical_feature</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">categorical_column</span></code>, <code class="docutils literal notranslate"><span class="pre">cat_feature</span></code>, <code class="docutils literal notranslate"><span class="pre">cat_column</span></code><ul>
+<li>指定分类特征</li>
+<li>用数字做索引, e.g. <code class="docutils literal notranslate"><span class="pre">categorical_feature=0,1,2</span></code> 意味着 column_0, column_1 和 column_2 是分类特征</li>
+<li>为列名添加前缀 <code class="docutils literal notranslate"><span class="pre">name:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">categorical_feature=name:c1,c2,c3</span></code> 意味着 c1, c2 和 c3 是分类特征</li>
+<li><strong>Note</strong>: 只支持分类与 <code class="docutils literal notranslate"><span class="pre">int</span></code> type. 索引从 <code class="docutils literal notranslate"><span class="pre">0</span></code> 开始. 同时它不包括标签栏</li>
+<li><strong>Note</strong>: 负值的值将被视为 <strong>missing values</strong></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">predict_raw_score</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">raw_score</span></code>, <code class="docutils literal notranslate"><span class="pre">is_predict_raw_score</span></code><ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">prediction</span></code> 任务</li>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> 只预测原始分数</li>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">false</span></code> 只预测分数</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">predict_leaf_index</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">leaf_index</span></code>, <code class="docutils literal notranslate"><span class="pre">is_predict_leaf_index</span></code><ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">prediction</span></code> 任务</li>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> to predict with leaf index of all trees</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">predict_contrib</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">contrib</span></code>, <code class="docutils literal notranslate"><span class="pre">is_predict_contrib</span></code><ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">prediction</span></code> 任务</li>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> 预估 <a class="reference external" href="https://arxiv.org/abs/1706.06060">SHAP values</a>, 这代表了每个特征对每个预测的贡献.
+生成的特征+1的值, 其中最后一个值是模型输出的预期值, 而不是训练数据</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">bin_construct_sample_cnt</span></code>, default=<code class="docutils literal notranslate"><span class="pre">200000</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">subsample_for_bin</span></code><ul>
+<li>用来构建直方图的数据的数量</li>
+<li>在设置更大的数据时, 会提供更好的训练效果, 但会增加数据加载时间</li>
+<li>如果数据非常稀疏, 则将其设置为更大的值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_iteration_predict</span></code>, default=<code class="docutils literal notranslate"><span class="pre">-1</span></code>, type=int<ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">prediction</span></code> 任务</li>
+<li>用于指定在预测中使用多少迭代</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code> 意味着没有限制</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">pred_early_stop</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool<ul>
+<li>如果 <code class="docutils literal notranslate"><span class="pre">true</span></code> 将使用提前停止来加速预测。可能影响精度</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">pred_early_stop_freq</span></code>, default=<code class="docutils literal notranslate"><span class="pre">10</span></code>, type=int<ul>
+<li>检查早期early-stopping的频率</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">pred_early_stop_margin</span></code>, default=<code class="docutils literal notranslate"><span class="pre">10.0</span></code>, type=double<ul>
+<li>t提前early-stopping的边际阈值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">use_missing</span></code>, default=<code class="docutils literal notranslate"><span class="pre">true</span></code>, type=bool<ul>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">false</span></code> 禁用丢失值的特殊句柄</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">zero_as_missing</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool<ul>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> 将所有的0都视为缺失的值 (包括 libsvm/sparse 矩阵中未显示的值)</li>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">false</span></code> 使用 <code class="docutils literal notranslate"><span class="pre">na</span></code> 代表缺失值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">init_score_file</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string<ul>
+<li>训练初始分数文件的路径, <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> 将使用 <code class="docutils literal notranslate"><span class="pre">train_data_file</span></code> + <code class="docutils literal notranslate"><span class="pre">.init</span></code> (如果存在)</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">valid_init_score_file</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=multi-string<ul>
+<li>验证初始分数文件的路径, <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> 将使用 <code class="docutils literal notranslate"><span class="pre">valid_data_file</span></code> + <code class="docutils literal notranslate"><span class="pre">.init</span></code> (如果存在)</li>
+<li>通过 <code class="docutils literal notranslate"><span class="pre">,</span></code> 对multi-validation进行分离</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>目标参数<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sigmoid</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, type=double<ul>
+<li>sigmoid 函数的参数. 将用于 <code class="docutils literal notranslate"><span class="pre">binary</span></code> 分类 和 <code class="docutils literal notranslate"><span class="pre">lambdarank</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">alpha</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.9</span></code>, type=double<ul>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Huber_loss">Huber loss</a> 和 <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_regression">Quantile regression</a> 的参数. 将用于 <code class="docutils literal notranslate"><span class="pre">regression</span></code> 任务</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">fair_c</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, type=double<ul>
+<li><a class="reference external" href="https://www.kaggle.com/c/allstate-claims-severity/discussion/24520">Fair loss</a> 的参数. 将用于 <code class="docutils literal notranslate"><span class="pre">regression</span></code> 任务</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">gaussian_eta</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, type=double<ul>
+<li>控制高斯函数的宽度的参数. 将用于 <code class="docutils literal notranslate"><span class="pre">regression_l1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">huber</span></code> losses</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">poisson_max_delta_step</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0.7</span></code>, type=double<ul>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_regression">Poisson regression</a> 的参数用于维护优化</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">scale_pos_weight</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, type=double<ul>
+<li>正值的权重 <code class="docutils literal notranslate"><span class="pre">binary</span></code> 分类 任务</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">boost_from_average</span></code>, default=<code class="docutils literal notranslate"><span class="pre">true</span></code>, type=bool<ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">regression</span></code> 任务</li>
+<li>将初始分数调整为更快收敛速度的平均值</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">is_unbalance</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">unbalanced_sets</span></code><ul>
+<li>用于 <code class="docutils literal notranslate"><span class="pre">binary</span></code> 分类</li>
+<li>如果训练数据不平衡 设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_position</span></code>, default=<code class="docutils literal notranslate"><span class="pre">20</span></code>, type=int<ul>
+<li>用于 <code class="docutils literal notranslate"><span class="pre">lambdarank</span></code></li>
+<li>将在这个 <a class="reference external" href="https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG">NDCG</a> 位置优化</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">label_gain</span></code>, default=<code class="docutils literal notranslate"><span class="pre">0,1,3,7,15,31,63,...</span></code>, type=multi-double<ul>
+<li>用于 <code class="docutils literal notranslate"><span class="pre">lambdarank</span></code></li>
+<li>有关获得标签. 列如, 如果使用默认标签增益 这个 <code class="docutils literal notranslate"><span class="pre">2</span></code> 的标签则是 <code class="docutils literal notranslate"><span class="pre">3</span></code></li>
+<li>使用 <code class="docutils literal notranslate"><span class="pre">,</span></code> 分隔</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">num_class</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">num_classes</span></code><ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">multiclass</span></code> 分类</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">reg_sqrt</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool<ul>
+<li>只用于 <code class="docutils literal notranslate"><span class="pre">regression</span></code></li>
+<li>适合``sqrt(label)`` 相反, 预测结果也会自动转换成 <code class="docutils literal notranslate"><span class="pre">pow2(prediction)</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>度量参数<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">metric</span></code>, default={<code class="docutils literal notranslate"><span class="pre">l2</span></code> for regression}, {<code class="docutils literal notranslate"><span class="pre">binary_logloss</span></code> for binary classification}, {<code class="docutils literal notranslate"><span class="pre">ndcg</span></code> for lambdarank}, type=multi-enum,
+options=<code class="docutils literal notranslate"><span class="pre">l1</span></code>, <code class="docutils literal notranslate"><span class="pre">l2</span></code>, <code class="docutils literal notranslate"><span class="pre">ndcg</span></code>, <code class="docutils literal notranslate"><span class="pre">auc</span></code>, <code class="docutils literal notranslate"><span class="pre">binary_logloss</span></code>, <code class="docutils literal notranslate"><span class="pre">binary_error</span></code> …<ul>
+<li><code class="docutils literal notranslate"><span class="pre">l1</span></code>, absolute loss, alias=<code class="docutils literal notranslate"><span class="pre">mean_absolute_error</span></code>, <code class="docutils literal notranslate"><span class="pre">mae</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">l2</span></code>, square loss, alias=<code class="docutils literal notranslate"><span class="pre">mean_squared_error</span></code>, <code class="docutils literal notranslate"><span class="pre">mse</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">l2_root</span></code>, root square loss, alias=<code class="docutils literal notranslate"><span class="pre">root_mean_squared_error</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">quantile</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_regression">Quantile regression</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">huber</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Huber_loss">Huber loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">fair</span></code>, <a class="reference external" href="https://www.kaggle.com/c/allstate-claims-severity/discussion/24520">Fair loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">poisson</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_regression">Poisson regression</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">ndcg</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG">NDCG</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">map</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Information_retrieval#Mean_average_precision">MAP</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">auc</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve">AUC</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">binary_logloss</span></code>, <a class="reference external" href="https://www.kaggle.com/wiki/LogLoss">log loss</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">binary_error</span></code>, 样本: <code class="docutils literal notranslate"><span class="pre">0</span></code> 的正确分类, <code class="docutils literal notranslate"><span class="pre">1</span></code> 错误分类</li>
+<li><code class="docutils literal notranslate"><span class="pre">multi_logloss</span></code>, mulit-class 损失日志分类</li>
+<li><code class="docutils literal notranslate"><span class="pre">multi_error</span></code>, error rate for mulit-class 出错率分类</li>
+<li><code class="docutils literal notranslate"><span class="pre">xentropy</span></code>, cross-entropy (与可选的线性权重), alias=<code class="docutils literal notranslate"><span class="pre">cross_entropy</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">xentlambda</span></code>, “intensity-weighted” 交叉熵, alias=<code class="docutils literal notranslate"><span class="pre">cross_entropy_lambda</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">kldiv</span></code>, <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback-Leibler divergence</a>, alias=<code class="docutils literal notranslate"><span class="pre">kullback_leibler</span></code></li>
+<li>支持多指标, 使用 <code class="docutils literal notranslate"><span class="pre">,</span></code> 分隔</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">metric_freq</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1</span></code>, type=int<ul>
+<li>频率指标输出</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">train_metric</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool, alias=<code class="docutils literal notranslate"><span class="pre">training_metric</span></code>, <code class="docutils literal notranslate"><span class="pre">is_training_metric</span></code><ul>
+<li>如果你需要输出训练的度量结果则设置 <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">ndcg_at</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1,2,3,4,5</span></code>, type=multi-int, alias=<code class="docutils literal notranslate"><span class="pre">ndcg_eval_at</span></code>, <code class="docutils literal notranslate"><span class="pre">eval_at</span></code><ul>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG">NDCG</a> 职位评估, 使用 <code class="docutils literal notranslate"><span class="pre">,</span></code> 分隔</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>网络参数<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>以下参数用于并行学习, 只用于基本(socket)版本。</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">num_machines</span></code>, default=<code class="docutils literal notranslate"><span class="pre">1</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">num_machine</span></code><ul>
+<li>用于并行学习的并行学习应用程序的数量</li>
+<li>需要在socket和mpi版本中设置这个</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">local_listen_port</span></code>, default=<code class="docutils literal notranslate"><span class="pre">12400</span></code>, type=int, alias=<code class="docutils literal notranslate"><span class="pre">local_port</span></code><ul>
+<li>监听本地机器的TCP端口</li>
+<li>在训练之前, 您应该再防火墙设置中放开该端口</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">time_out</span></code>, default=<code class="docutils literal notranslate"><span class="pre">120</span></code>, type=int<ul>
+<li>允许socket几分钟内超时</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">machine_list_file</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string, alias=<code class="docutils literal notranslate"><span class="pre">mlist</span></code><ul>
+<li>为这个并行学习应用程序列出机器的文件</li>
+<li>每一行包含一个IP和一个端口为一台机器。格式是ip port, 由空格分隔</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="gpu">
+<h2>GPU 参数<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">gpu_platform_id</span></code>, default=<code class="docutils literal notranslate"><span class="pre">-1</span></code>, type=int<ul>
+<li>OpenCL 平台 ID. 通常每个GPU供应商都会公开一个OpenCL平台。</li>
+<li>default为 <code class="docutils literal notranslate"><span class="pre">-1</span></code>, 意味着整个系统平台</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">gpu_device_id</span></code>, default=<code class="docutils literal notranslate"><span class="pre">-1</span></code>, type=int<ul>
+<li>OpenCL设备ID在指定的平台上。 在选定的平台上的每一个GPU都有一个唯一的设备ID</li>
+<li>default为``-1``, 这个default意味着选定平台上的设备</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">gpu_use_dp</span></code>, default=<code class="docutils literal notranslate"><span class="pre">false</span></code>, type=bool<ul>
+<li>设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> 在GPU上使用双精度GPU (默认使用单精度)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2>模型参数<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>该特性仅在命令行版本中得到支持。</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">convert_model_language</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, type=string<ul>
+<li>只支持``cpp``</li>
+<li>如果 <code class="docutils literal notranslate"><span class="pre">convert_model_language</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">task``时</span> <span class="pre">该模型也将转换为</span> <span class="pre">``train</span></code>,</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">convert_model</span></code>, default=<code class="docutils literal notranslate"><span class="pre">&quot;gbdt_prediction.cpp&quot;</span></code>, type=string<ul>
+<li>转换模型的输出文件名</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>其他<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3>持续训练输入分数<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>LightGBM支持对初始得分进行持续的训练。它使用一个附加的文件来存储这些初始值, 如下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.5</span>
+<span class="o">-</span><span class="mf">0.1</span>
+<span class="mf">0.9</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>它意味着最初的得分第一个数据行是 <code class="docutils literal notranslate"><span class="pre">0.5`,第二个是</span> <span class="pre">``-0.1</span></code> 等等。
+初始得分文件与数据文件逐行对应, 每一行有一个分数。
+如果数据文件的名称是 <code class="docutils literal notranslate"><span class="pre">train.txt`,</span> <span class="pre">最初的分数文件应该被命名为</span> <span class="pre">``train.txt.init</span></code> 与作为数据文件在同一文件夹。
+在这种情况下, LightGBM 将自动加载初始得分文件, 如果它存在的话。</p>
+</div>
+<div class="section" id="id11">
+<h3>权重数据<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>LightGBM 加权训练。它使用一个附加文件来存储权重数据, 如下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0</span>
+<span class="mf">0.5</span>
+<span class="mf">0.8</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>它意味的重压着第一个数据行是 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, 第二个是 <code class="docutils literal notranslate"><span class="pre">0.5</span></code>, 等等.
+权重文件按行与数据文件行相对应, 每行的权重为.
+如果数据文件的名称是 <code class="docutils literal notranslate"><span class="pre">train.txt</span></code>, 应该将重量文件命名为 <code class="docutils literal notranslate"><span class="pre">train.txt.weight</span></code> 与数据文件相同的文件夹.
+在这种情况下, LightGBM 将自动加载权重文件, 如果它存在的话.</p>
+<p><strong>update</strong>:
+现在可以在数据文件中指定 <code class="docutils literal notranslate"><span class="pre">weight</span></code> 列。请参阅以上参数的参数.</p>
+</div>
+<div class="section" id="id12">
+<h3>查询数据<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>对于 LambdaRank 的学习, 它需要查询信息来训练数据.
+LightGBM 使用一个附加文件来存储查询数据, 如下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">27</span>
+<span class="mi">18</span>
+<span class="mi">67</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>它意味着第一个 <code class="docutils literal notranslate"><span class="pre">27</span></code> 行样本属于一个查询和下一个 <code class="docutils literal notranslate"><span class="pre">18</span></code> 行属于另一个, 等等.
+<strong>Note</strong>: 数据应该由查询来排序.</p>
+<p>如果数据文件的名称是``train.txt`,这个查询文件应该被命名为``train.txt.query``查询在相同的训练数据文件夹中。
+在这种情况下, LightGBM将自动加载查询文件, 如果它存在的话。</p>
+<p><strong>update</strong>:
+现在可以在数据文件中指定特定的 query/group id。请参阅上面的参数组。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Parameters-Tuning.html" class="btn btn-neutral float-right" title="参数优化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Experiments.html" class="btn btn-neutral" title="实验" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Microsoft Corporation. Translated by ApacheCN 开源组织, 机器学习企鹅交流群: 629470233
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/rst_links_fix.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102475051-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102475051-8');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b8d9c7f39d80628c950dbae02000d5ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
+<!-- ssi include stats -->
+<!--#include virtual="/static/stats/global.shtml"-->
+<!--#include virtual="/static/stats/custom.shtml"-->
+
+
+
+</body>
+</html>
